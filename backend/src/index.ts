@@ -2,7 +2,7 @@ import { api } from "./api";
 import { apiPort as port, mongodbUrl } from "./config.json";
 import { DBHandler } from "./db";
 
-// The server will be hosted under the /api path
+// The server will be hosted under the /api uri
 // "/" is for the vue app
 
 // Connect to MongoDB
