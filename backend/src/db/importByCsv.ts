@@ -2,14 +2,15 @@ import csv from "csv-parser";
 import fs, { existsSync } from "fs";
 import path from "path";
 
-export async function importByCsv() {
+export async function importByCsv(): Promise<void> {
     const results: any[] = [];
     const dataPath = path.join(process.cwd(), "testing-data");
 
-    if (existsSync(dataPath) === false) {
+    if (!existsSync(dataPath)) {
         fs.mkdirSync(dataPath);
     }
-    if (existsSync(path.join(dataPath, "used")) === false) {
+
+    if (!existsSync(path.join(dataPath, "used"))) {
         fs.mkdirSync(path.join(dataPath, "used"));
     }
 
