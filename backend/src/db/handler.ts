@@ -1,12 +1,17 @@
 import mongoose from "mongoose";
-import { mongodbUrl } from "../config.json";
 import { Event, PendingApprovalEvent } from "./schemas";
 
 export class DBHandler {
     private static _instance: DBHandler;
 
     private constructor() {
-        mongoose.connect(mongodbUrl).catch((err) => {
+        const mongoUrl = process.env.MONGODB_URL;
+        if (!mongoUrl) {
+            throw new Error(
+                "MONGODB_URL is not defined in the environment variables"
+            );
+        }
+        mongoose.connect(mongoUrl).catch((err) => {
             throw err;
         });
     }

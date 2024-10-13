@@ -1,11 +1,15 @@
 import express from "express";
 import { DBHandler, PendingApprovalEvent } from "../db";
-import * as config from "../config.json";
 
 export const app = express();
 
 app.get("/", (req, res) => {
-    res.redirect(config.frontendUrl);
+    const frontendUrl = process.env.FRONTEND_URL;
+    if (!frontendUrl) {
+        res.status(500).send("Error configuration on the server side.");
+        return;
+    }
+    res.redirect(frontendUrl);
 });
 
 app.get("/api", (req, res) => {
@@ -53,15 +57,15 @@ app.post("/api/event/approve", async (req, res) => {
     if (adminKey !== process.env.ADMIN_KEY) {
         return res.status(403).json({ error: "Wrong admin key." });
     }
-
-    const result = await DBHandler.getInstance().approveEvent(eventId);
-    if (result) {
-        res.status(200).json({ message: `Event approved, id: ${result}` });
-    } else {
-        res.status(400).json({ error: "Failed to approve event." });
+    try {
+        const result = await DBHandler.getInstance().approveEvent(eventId);
+        res.status(200).json({ message: `Event approved (id: ${result})` });
+    } catch (err) {
+        res.status(400).json({ error: `Faild to approve event (err: ${err})` });
+        return;
     }
 });
 
-app.listen(config.apiPort, () => {
-    console.log(`Server is running on port ${config.apiPort}`);
+app.listen(process.env.PORT, () => {
+    console.log(`Server is running on port ${process.env.PORT}`);
 });
