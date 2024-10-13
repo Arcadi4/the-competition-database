@@ -1,4 +1,6 @@
 {
     "apiPort": 3000,
-    "mongodbUrl": "mongodb://localhost:27017/ocd"
+    "mongodbUrl": "mongodb://localhost:27017/ocd",
+    "frontendUrl": "http://localhost:8080",
+    "adminKey": "S*S3bTYj!F%m$A2j@9@XFekakL&pTT!qZ7R3XJ2uuf6HLCJfs5X%qDgoexEwVCUq"
 }

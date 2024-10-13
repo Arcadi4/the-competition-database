@@ -17,18 +17,18 @@ const tags = ["Null"];
 
 const eventSchema = new Schema({
     title: { type: String, required: true, trim: true },
-    briefDescription: { type: String, trim: true },
-    longDescription: { type: String, trim: true },
+    briefDescription: { type: String, required: true, trim: true },
+    longDescription: { type: String, required: true, trim: true },
     tags: { type: [String], enum: tags },
-    timestamps: { type: [Date], required: true, default: [Date.now()] },
-    sharepointUploads: { type: [String], required: false, match: urlRegex },
+    timestamp: { type: Date, required: true, default: Date.now },
     // primaryChildNodes: { type: [Schema.Types.ObjectId], ref: "nodes" },
     // trivialChildNodes: { type: [Schema.Types.ObjectId], ref: "nodes" },
+    sharepointLinks: { type: [String], match: urlRegex },
 });
 
 // export const Node = mongoose.model("nodes", nodeSchema);
-export const Event = mongoose.model("events", eventSchema);
+export const Event = mongoose.model("Event", eventSchema);
 export const PendingApprovalEvent = mongoose.model(
-    "pendingApprovalEvents",
+    "PendingApprovalEvent",
     eventSchema
 );

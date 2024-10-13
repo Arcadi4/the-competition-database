@@ -1,8 +1,8 @@
-import { api } from "./api";
+import { app } from "./api";
 import { apiPort as port, mongodbUrl } from "./config.json";
 import { DBHandler } from "./db";
 
-// The server will be hosted under the /api uri
+// The server will be hosted under the /app uri
 // "/" is for the vue app
 
 // Connect to MongoDB
@@ -14,9 +14,9 @@ try {
     process.exit(1);
 }
 
-// Start the api server
+// Start the app server
 try {
-    api.listen(port, () => {
+    app.listen(port, () => {
         console.log(`Server is running at http://localhost:${port}`);
     });
 } catch (err) {

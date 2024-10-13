@@ -1,14 +1,14 @@
-import mongoose, { Document } from "mongoose";
+import mongoose from "mongoose";
 import { mongodbUrl } from "../config.json";
-import { importByCsv } from "./importByCsv";
 import { Event, PendingApprovalEvent } from "./schemas";
 
 export class DBHandler {
     private static _instance: DBHandler;
 
     private constructor() {
-        this.connectToDatabase();
-        importByCsv();
+        mongoose.connect(mongodbUrl).catch((err) => {
+            throw err;
+        });
     }
 
     public static getInstance() {
@@ -18,25 +18,32 @@ export class DBHandler {
         return this._instance;
     }
 
-    public async addEventFromJson(event: JSON): Promise<Document> {
-        return new Event(event).save();
+    // public async getNodeById(id: string): Promise<JSON | null> {
+    //     return mongoose.model("nodes").findById(id);
+    // }
 
-        // TODO: Switch to this when implementing approval
-        // return new PendingApprovalEvent(event).save();
+    public async getEventById(id: string): Promise<JSON | null> {
+        return mongoose.model("events").findById(id);
     }
 
-    public async approveEventById(id: string): Promise<Document | null> {
+    public async getEventByName(name: string): Promise<JSON[] | null> {
+        return mongoose.model("events").find({ title: name });
+    }
+
+    public async addPendingApprovalEvent(event: JSON): Promise<string> {
+        const newEvent = new PendingApprovalEvent(event);
+        await newEvent.save();
+        return newEvent.id;
+    }
+
+    public async approveEvent(id: string): Promise<string | null> {
         const event = await PendingApprovalEvent.findById(id);
         if (!event) {
             return null;
         }
-        const approvedEvent = new Event(event);
-        await approvedEvent.save();
-        await PendingApprovalEvent.deleteOne({ _id: id });
-        return approvedEvent;
-    }
-
-    private async connectToDatabase() {
-        await mongoose.connect(mongodbUrl);
+        const newEvent = new Event(event);
+        await newEvent.save();
+        await PendingApprovalEvent.findByIdAndDelete(id);
+        return newEvent.id;
     }
 }
