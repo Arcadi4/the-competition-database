@@ -1,12 +1,12 @@
 <template>
-    <n-flex vertical class="timeline-container" ref="timelineContainer">
+    <n-flex ref="timelineContainer" class="timeline-container" vertical>
         <TimelineNode
             v-for="node in nodes"
             :key="node.id"
-            :title="node.title"
             :description="node.description"
-            :weekday="formatWeekday(node.date)"
             :monthday="formatMonthday(node.date)"
+            :title="node.title"
+            :weekday="formatWeekday(node.date)"
         />
     </n-flex>
 </template>
@@ -21,12 +21,12 @@ import { ITimelineNode } from "@/interfaces";
 const nodes = ref<ITimelineNode[]>([]);
 const timelineContainer = ref<HTMLElement | null>(null);
 
-const formatWeekday = (date: string): string => {
+const formatWeekday = (date: Date): string => {
     const dateobj = new Date(date);
     return dateobj.toLocaleString("en-US", { weekday: "short" });
 };
 
-const formatMonthday = (date: string): string => {
+const formatMonthday = (date: Date): string => {
     const dateobj = new Date(date);
     return dateobj.toLocaleString("en-US", { day: "2-digit" });
 };
@@ -46,24 +46,18 @@ onMounted(async () => {
 <style scoped>
 .timeline-container {
     position: relative;
-    left: 60px;
-    width: 100%;
-    max-width: calc(100% - 60px);
-}
-
-/* The line */
-:root {
-    --line-top: 0;
-    --line-height: 100%;
+    left: 40px;
+    width: calc(100% - 120px);
+    max-width: calc(768px);
 }
 
 .timeline-container::before {
     content: "";
     position: absolute;
     left: -35px;
-    top: var(--line-top, 0);
+    top: 0;
     width: 2px;
-    height: var(--line-height, 100%);
+    height: 100%;
     background-color: #eeeeee;
     border-radius: 1px;
 }

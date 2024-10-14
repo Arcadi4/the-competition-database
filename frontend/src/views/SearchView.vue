@@ -1,15 +1,9 @@
 <template>
-    <div style="display: flex; justify-content: center; height: 100%">
-        <n-input
-            round
-            placeholder="Search..."
-            style="position: relative; width: 75%; top: 50%"
-        >
-            <template #suffix>
-                <search fill="#888" />
-            </template>
-        </n-input>
-    </div>
+    <n-input placeholder="Search..." round style="max-width: 768px; width: 50%">
+        <template #suffix>
+            <search fill="#888" style="transform: translateY(5%)" />
+        </template>
+    </n-input>
 </template>
 
 <script setup>

@@ -1,5 +1,5 @@
 <template>
-    <n-layout>
+    <n-layout style="max-width: 768px">
         <n-layout-content>
             <h1>This is an about page</h1>
             <p>
@@ -16,6 +16,6 @@
     </n-layout>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { NLayout, NLayoutContent } from "naive-ui";
 </script>

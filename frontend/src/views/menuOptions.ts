@@ -1,26 +1,20 @@
-import { HomeTwo, Info, Search } from "@icon-park/vue-next"
-import { MenuOption } from "naive-ui"
-import { h } from "vue"
-import { RouterLink } from "vue-router"
+import { DocAdd, HomeTwo, Info, People, Search } from "@icon-park/vue-next";
+import { MenuOption } from "naive-ui";
+import { h } from "vue";
+import { RouterLink } from "vue-router";
 
 export const menuOptions: MenuOption[] = [
     {
         label: () =>
             h(
                 RouterLink,
-                { to: { name: "app" } },
+                { to: { name: "timeline" } },
                 { default: () => "Timeline" }
             ),
-        key: "app",
+        key: "timeline",
         icon: () =>
             h(HomeTwo, {
-                style: {
-                    height: "24px",
-                    width: "24px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                },
+                style: IconStyle,
             }),
     },
     {
@@ -34,13 +28,7 @@ export const menuOptions: MenuOption[] = [
         key: "search",
         icon: () =>
             h(Search, {
-                style: {
-                    height: "24px",
-                    width: "24px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                },
+                style: IconStyle,
             }),
     },
     {
@@ -53,13 +41,36 @@ export const menuOptions: MenuOption[] = [
         key: "about",
         icon: () =>
             h(Info, {
-                style: {
-                    height: "24px",
-                    width: "24px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                },
+                style: IconStyle,
             }),
     },
-]
+    {
+        label: () =>
+            h(
+                RouterLink,
+                { to: { name: "contribute" } },
+                { default: () => "Contribute" }
+            ),
+        key: "contribute",
+        icon: () =>
+            h(DocAdd, {
+                style: IconStyle,
+            }),
+    },
+    {
+        label: () => h(RouterLink),
+        key: "login",
+        icon: () =>
+            h(People, {
+                style: IconStyle,
+            }),
+    },
+];
+
+const IconStyle = {
+    height: "24px",
+    width: "24px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+};

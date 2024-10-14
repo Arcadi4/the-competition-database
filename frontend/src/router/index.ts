@@ -2,11 +2,12 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import AboutView from "@/views/AboutView.vue";
 import TimelineView from "@/views/TimelineView.vue";
 import SearchView from "@/views/SearchView.vue";
+import ContributeView from "@/views/ContributeView.vue";
 
 const routes: Array<RouteRecordRaw> = [
     {
         path: "/",
-        name: "app",
+        name: "timeline",
         component: TimelineView,
     },
     {
@@ -18,6 +19,16 @@ const routes: Array<RouteRecordRaw> = [
         path: "/search",
         name: "search",
         component: SearchView,
+    },
+    {
+        path: "/contribute",
+        name: "contribute",
+        component: ContributeView,
+    },
+    {
+        path: "/login",
+        name: "login",
+        component: ContributeView,
     },
 ];
 

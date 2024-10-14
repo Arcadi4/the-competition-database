@@ -1,22 +1,22 @@
 <template>
     <n-config-provider>
-        <n-layout style="max-height: 100%" has-sider position="absolute">
+        <n-layout has-sider position="absolute" style="max-height: 100%">
             <n-layout-sider
-                bordered
-                :width="256"
                 :collapsed="sideBarCollapsed"
-                collapse-mode="width"
                 :collapsed-width="64"
+                :width="256"
+                bordered
+                collapse-mode="width"
                 @collapse="sideBarCollapsed = true"
                 @expand="sideBarCollapsed = false"
             >
                 <n-menu
+                    :collapsed="sideBarCollapsed"
+                    :collapsed-icon-size="24"
+                    :collapsed-width="64"
+                    :icon-size="16"
                     :options="menuOptions"
                     :value="activeKey"
-                    :icon-size="16"
-                    :collapsed="sideBarCollapsed"
-                    :collapsed-width="64"
-                    :collapsed-icon-size="24"
                 />
                 <n-button
                     circle
@@ -28,16 +28,16 @@
                 </n-button>
             </n-layout-sider>
             <n-layout
-                :native-scrollbar="false"
                 ref="headerLayoutRef"
-                content-class="router-view"
+                :native-scrollbar="false"
                 :on-scroll="headerScrollHandler"
+                content-class="router-view"
             >
                 <n-layout-header
-                    bordered
-                    :position="headerPosition"
-                    style="z-index: 10"
                     ref="headerRef"
+                    :position="headerPosition"
+                    bordered
+                    style="z-index: 10"
                 >
                     <div style="padding: 20px">
                         <h2 style="line-height: 0">{{ date }}</h2>
@@ -45,10 +45,9 @@
                     </div>
                 </n-layout-header>
                 <n-layout-content
-                    content-class="router-view"
-                    content-style="padding: 20px; height: 100%; width: 100%"
-                    style="height: 100%"
                     bordered
+                    content-class="router-view"
+                    content-style="display: flex; justify-content: center; padding: 20px 0px"
                 >
                     <router-view class="router-view" />
                 </n-layout-content>
@@ -57,18 +56,18 @@
     </n-config-provider>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { Left, Right } from "@icon-park/vue-next";
 import {
-    NLayout,
-    NLayoutSider,
-    NLayoutContent,
-    NMenu,
     NButton,
-    NLayoutHeader,
     NConfigProvider,
+    NLayout,
+    NLayoutContent,
+    NLayoutHeader,
+    NLayoutSider,
+    NMenu,
 } from "naive-ui";
-import { watch, ref, onMounted, onUnmounted } from "vue";
+import { onMounted, onUnmounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { menuOptions } from "./views/menuOptions";
 
