@@ -17,5 +17,5 @@
 </template>
 
 <script setup lang="ts">
-import { NLayout, NLayoutContent } from "naive-ui"
+import { NLayout, NLayoutContent } from "naive-ui";
 </script>

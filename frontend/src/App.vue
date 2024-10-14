@@ -58,7 +58,7 @@
 </template>
 
 <script setup lang="ts">
-import { Left, Right } from "@icon-park/vue-next"
+import { Left, Right } from "@icon-park/vue-next";
 import {
     NLayout,
     NLayoutSider,
@@ -67,62 +67,62 @@ import {
     NButton,
     NLayoutHeader,
     NConfigProvider,
-} from "naive-ui"
-import { watch, ref, onMounted, onUnmounted } from "vue"
-import { useRoute } from "vue-router"
-import { menuOptions } from "./views/menuOptions"
+} from "naive-ui";
+import { watch, ref, onMounted, onUnmounted } from "vue";
+import { useRoute } from "vue-router";
+import { menuOptions } from "./views/menuOptions";
 
-const route = useRoute()
-const activeKey = ref("")
+const route = useRoute();
+const activeKey = ref("");
 
 watch(
     route,
     (newRoute) => {
-        activeKey.value = newRoute.name as string
+        activeKey.value = newRoute.name as string;
     },
     { immediate: true }
-)
+);
 
-const sideBarCollapsed = ref(true)
+const sideBarCollapsed = ref(true);
 
 const collapseSideBar = () => {
-    sideBarCollapsed.value = !sideBarCollapsed.value
-}
+    sideBarCollapsed.value = !sideBarCollapsed.value;
+};
 
-const date = ref(new Date().toLocaleString().split(" ")[0])
-const time = ref(new Date().toLocaleString().split(" ")[1])
+const date = ref(new Date().toLocaleString().split(" ")[0]);
+const time = ref(new Date().toLocaleString().split(" ")[1]);
 
 const updateTime = () => {
-    date.value = new Date().toLocaleString().split(" ")[0]
-    time.value = new Date().toLocaleString().split(" ")[1]
-}
+    date.value = new Date().toLocaleString().split(" ")[0];
+    time.value = new Date().toLocaleString().split(" ")[1];
+};
 
-let intervalId: number
+let intervalId: number;
 
 onMounted(() => {
-    intervalId = setInterval(updateTime, 1000)
-})
+    intervalId = setInterval(updateTime, 1000);
+});
 
 onUnmounted(() => {
-    clearInterval(intervalId)
-})
+    clearInterval(intervalId);
+});
 
-const headerLayoutRef = ref<HTMLElement | null>(null)
-const headerPosition = ref<"absolute" | "static">("static")
-const headerRef = ref<HTMLElement | null>(null)
+const headerLayoutRef = ref<HTMLElement | null>(null);
+const headerPosition = ref<"absolute" | "static">("static");
+const headerRef = ref<HTMLElement | null>(null);
 
 const headerScrollHandler = () => {
-    console.log(headerLayoutRef.value.scrollbarInstRef.containerScrollTop)
-    console.log(headerRef.value)
+    console.log(headerLayoutRef.value.scrollbarInstRef.containerScrollTop);
+    console.log(headerRef.value);
     if (
         headerLayoutRef.value?.scrollbarInstRef.containerScrollTop &&
         headerLayoutRef.value.scrollbarInstRef.containerScrollTop > 50
     ) {
-        headerPosition.value = "absolute"
+        headerPosition.value = "absolute";
     } else {
-        headerPosition.value = "static"
+        headerPosition.value = "static";
     }
-}
+};
 </script>
 
 <style lang="scss">

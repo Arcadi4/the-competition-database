@@ -1,7 +1,7 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router"
-import AboutView from "@/views/AboutView.vue"
-import TimelineView from "@/views/TimelineView.vue"
-import SearchView from "@/views/SearchView.vue"
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import AboutView from "@/views/AboutView.vue";
+import TimelineView from "@/views/TimelineView.vue";
+import SearchView from "@/views/SearchView.vue";
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -19,11 +19,11 @@ const routes: Array<RouteRecordRaw> = [
         name: "search",
         component: SearchView,
     },
-]
+];
 
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes,
-})
+});
 
-export default router
+export default router;

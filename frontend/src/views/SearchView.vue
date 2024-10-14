@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import { Search } from "@icon-park/vue-next"
+import { Search } from "@icon-park/vue-next";
 </script>
 
 <style></style>

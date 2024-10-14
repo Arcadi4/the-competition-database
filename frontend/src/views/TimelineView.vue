@@ -12,35 +12,35 @@
 </template>
 
 <script lang="ts" setup>
-import TimelineNode from "@/components/TimelineNode.vue"
-import { onMounted, ref } from "vue"
-import { NFlex } from "naive-ui"
-import axios from "axios"
-import { ITimelineNode } from "@/interfaces"
+import TimelineNode from "@/components/TimelineNode.vue";
+import { onMounted, ref } from "vue";
+import { NFlex } from "naive-ui";
+import axios from "axios";
+import { ITimelineNode } from "@/interfaces";
 
-const nodes = ref<ITimelineNode[]>([])
-const timelineContainer = ref<HTMLElement | null>(null)
+const nodes = ref<ITimelineNode[]>([]);
+const timelineContainer = ref<HTMLElement | null>(null);
 
 const formatWeekday = (date: string): string => {
-    const dateobj = new Date(date)
-    return dateobj.toLocaleString("en-US", { weekday: "short" })
-}
+    const dateobj = new Date(date);
+    return dateobj.toLocaleString("en-US", { weekday: "short" });
+};
 
 const formatMonthday = (date: string): string => {
-    const dateobj = new Date(date)
-    return dateobj.toLocaleString("en-US", { day: "2-digit" })
-}
+    const dateobj = new Date(date);
+    return dateobj.toLocaleString("en-US", { day: "2-digit" });
+};
 
 // TODO: Replace this with a real API endpoint
 
 onMounted(async () => {
     try {
-        const response = await axios.get("/testNodeData.json")
-        nodes.value = response.data
+        const response = await axios.get("/testNodeData.json");
+        nodes.value = response.data;
     } catch (error) {
-        console.error("Error fetching timeline data:", error)
+        console.error("Error fetching timeline data:", error);
     }
-})
+});
 </script>
 
 <style scoped>

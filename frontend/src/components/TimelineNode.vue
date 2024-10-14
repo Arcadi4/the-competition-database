@@ -11,15 +11,15 @@
 </template>
 
 <script lang="ts" setup>
-import { NCard, NFlex } from "naive-ui"
-import { defineProps } from "vue"
+import { NCard, NFlex } from "naive-ui";
+import { defineProps } from "vue";
 
 defineProps({
     title: String,
     description: String,
     weekday: String,
     monthday: String,
-})
+});
 </script>
 
 <style scoped>
