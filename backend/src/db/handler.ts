@@ -38,9 +38,15 @@ export class DBHandler {
         return Event.findById(id);
     }
 
-    public async getEventByName(name: string): Promise<JSON[] | null> {
-        console.log(`Event fetching with name: ${name}`);
-        return Event.find({ title: name });
+    public async queryEvents(query: string): Promise<JSON[] | null> {
+        console.log(`Event fetching with query: ${query}`);
+        return Event.find({
+            $or: [
+                { title: { $regex: query, $options: "i" } },
+                { briefDescription: { $regex: query, $options: "i" } },
+                { longDescription: { $regex: query, $options: "i" } },
+            ],
+        });
     }
 
     public async addPendingApprovalEvent(event: JSON): Promise<string> {

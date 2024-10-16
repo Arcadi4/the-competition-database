@@ -1,4 +1,4 @@
-export interface ITimelineNode {
+export interface IEvent {
     id: number;
     title: string;
     briefDescription: string;

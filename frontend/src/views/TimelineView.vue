@@ -1,7 +1,7 @@
 <template>
     <n-flex ref="timelineContainer" class="timeline-container" vertical>
         <timeline-node
-            v-for="node in nodes"
+            v-for="node in events"
             :key="node.id"
             :description="node.briefDescription"
             :monthday="formatMonthday(node.timestamp)"
@@ -16,45 +16,28 @@ import TimelineNode from "@/components/TimelineNode.vue";
 import { onMounted, ref } from "vue";
 import { NFlex } from "naive-ui";
 import axios from "axios";
-import { ITimelineNode } from "@/interfaces";
+import { IEvent } from "@/interfaces";
 import { apiUrl } from "@/main";
+import { formatMonthday, formatWeekday } from "@/utilities";
 
-let nodes = ref<ITimelineNode[]>([]);
+const events = ref<IEvent[]>([]);
 const timelineContainer = ref<HTMLElement | null>(null);
 
-const formatWeekday = (date: string): string => {
-    const dateobj = new Date(date);
-    return dateobj.toLocaleString("en-US", { weekday: "short" });
-};
-
-const formatMonthday = (date: string): string => {
-    const dateobj = new Date(date);
-    return dateobj.toLocaleString("en-US", { day: "2-digit" });
-};
-
-// TODO: Replace this with a real API endpoint
-
 onMounted(async () => {
-    try {
-        const response = await axios.get(`${apiUrl}/api/event/all`);
-        nodes.value = response.data.map(
-            (node: ITimelineNode, index: number) => ({
-                ...node,
-                id: index + 1,
-            })
-        );
-    } catch (error) {
-        console.error("Error fetching timeline data:", error);
-    }
+    const response = await axios.get(`${apiUrl}/api/event/all`);
+    events.value = response.data.map((node: IEvent, index: number) => ({
+        ...node,
+        id: index + 1,
+    }));
 });
 </script>
 
 <style scoped>
 .timeline-container {
     position: relative;
-    left: 40px;
+    left: 80px;
     width: calc(100% - 120px);
-    max-width: calc(768px);
+    max-width: 768px;
 }
 
 .timeline-container::before {
