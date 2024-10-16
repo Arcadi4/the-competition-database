@@ -30,7 +30,6 @@ import { Search } from "@icon-park/vue-next";
 import { h, ref } from "vue";
 import axios from "axios";
 import { apiUrl } from "@/main";
-import { NButton, NFlex, NInput } from "naive-ui";
 import TimelineNode from "@/components/TimelineNode.vue";
 import { formatMonthday, formatWeekday } from "@/utilities";
 import { IEvent } from "@/interfaces";

@@ -14,7 +14,6 @@
 <script lang="ts" setup>
 import TimelineNode from "@/components/TimelineNode.vue";
 import { onMounted, ref } from "vue";
-import { NFlex } from "naive-ui";
 import axios from "axios";
 import { IEvent } from "@/interfaces";
 import { apiUrl } from "@/main";

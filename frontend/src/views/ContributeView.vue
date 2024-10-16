@@ -10,8 +10,6 @@
     </n-layout>
 </template>
 
-<script lang="ts" setup>
-import { NLayout, NLayoutContent } from "naive-ui";
-</script>
+<script lang="ts" setup></script>
 
 <style scoped></style>

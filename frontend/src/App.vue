@@ -58,15 +58,6 @@
 
 <script lang="ts" setup>
 import { Left, Right } from "@icon-park/vue-next";
-import {
-    NButton,
-    NConfigProvider,
-    NLayout,
-    NLayoutContent,
-    NLayoutHeader,
-    NLayoutSider,
-    NMenu,
-} from "naive-ui";
 import { onMounted, onUnmounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { menuOptions } from "./views/menuOptions";

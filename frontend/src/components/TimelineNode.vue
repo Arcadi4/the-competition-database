@@ -1,5 +1,5 @@
 <template>
-    <n-flex class="timeline-node" :wrap="false">
+    <n-flex :wrap="false" class="timeline-node">
         <div class="side-date-display">
             <p style="line-height: 0">{{ weekday }}</p>
             <h1 style="line-height: 0">{{ monthday }}</h1>
@@ -11,7 +11,6 @@
 </template>
 
 <script lang="ts" setup>
-import { NCard, NFlex } from "naive-ui";
 import { defineProps } from "vue";
 
 defineProps({
