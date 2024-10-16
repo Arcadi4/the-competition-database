@@ -1,8 +1,9 @@
+import dotenv from "dotenv";
 import { app } from "./api";
 import { DBHandler } from "./db";
-import dotenv from "dotenv";
+import path from "path";
 
-dotenv.config();
+dotenv.config({ path: path.resolve(__dirname, ".env") });
 
 // Connect to MongoDB
 const mongoUrl = process.env.MONGODB_URL;

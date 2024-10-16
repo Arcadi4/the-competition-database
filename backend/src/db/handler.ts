@@ -23,21 +23,30 @@ export class DBHandler {
         return this._instance;
     }
 
-    // public async getNodeById(id: string): Promise<JSON | null> {
-    //     return mongoose.model("nodes").findById(id);
-    // }
+    public async getAllEvents(): Promise<JSON[]> {
+        console.log("All events fetching");
+        return Event.find();
+    }
+
+    public async getEventByTimeRange(start: Date, end: Date): Promise<JSON[]> {
+        console.log(`Event fetching with start: ${start} and end: ${end}`);
+        return Event.find({ timestamp: { $gte: start, $lte: end } });
+    }
 
     public async getEventById(id: string): Promise<JSON | null> {
-        return mongoose.model("events").findById(id);
+        console.log(`Event fetching with id: ${id}`);
+        return Event.findById(id);
     }
 
     public async getEventByName(name: string): Promise<JSON[] | null> {
-        return mongoose.model("events").find({ title: name });
+        console.log(`Event fetching with name: ${name}`);
+        return Event.find({ title: name });
     }
 
     public async addPendingApprovalEvent(event: JSON): Promise<string> {
         const newEvent = new PendingApprovalEvent(event);
         await newEvent.save();
+        console.log(`Added new pending approval event with id: ${newEvent.id}`);
         return newEvent.id;
     }
 
@@ -48,6 +57,7 @@ export class DBHandler {
         }
         const newEvent = new Event(event);
         await newEvent.save();
+        console.log(`Approved event with id: ${id}`);
         await PendingApprovalEvent.findByIdAndDelete(id);
         return newEvent.id;
     }

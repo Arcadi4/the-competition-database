@@ -1,12 +1,12 @@
 <template>
     <n-flex ref="timelineContainer" class="timeline-container" vertical>
-        <TimelineNode
+        <timeline-node
             v-for="node in nodes"
             :key="node.id"
-            :description="node.description"
-            :monthday="formatMonthday(node.date)"
+            :description="node.briefDescription"
+            :monthday="formatMonthday(node.timestamp)"
             :title="node.title"
-            :weekday="formatWeekday(node.date)"
+            :weekday="formatWeekday(node.timestamp)"
         />
     </n-flex>
 </template>
@@ -17,16 +17,17 @@ import { onMounted, ref } from "vue";
 import { NFlex } from "naive-ui";
 import axios from "axios";
 import { ITimelineNode } from "@/interfaces";
+import { apiUrl } from "@/main";
 
-const nodes = ref<ITimelineNode[]>([]);
+let nodes = ref<ITimelineNode[]>([]);
 const timelineContainer = ref<HTMLElement | null>(null);
 
-const formatWeekday = (date: Date): string => {
+const formatWeekday = (date: string): string => {
     const dateobj = new Date(date);
     return dateobj.toLocaleString("en-US", { weekday: "short" });
 };
 
-const formatMonthday = (date: Date): string => {
+const formatMonthday = (date: string): string => {
     const dateobj = new Date(date);
     return dateobj.toLocaleString("en-US", { day: "2-digit" });
 };
@@ -35,8 +36,13 @@ const formatMonthday = (date: Date): string => {
 
 onMounted(async () => {
     try {
-        const response = await axios.get("/testNodeData.json");
-        nodes.value = response.data;
+        const response = await axios.get(`${apiUrl}/api/event/all`);
+        nodes.value = response.data.map(
+            (node: ITimelineNode, index: number) => ({
+                ...node,
+                id: index + 1,
+            })
+        );
     } catch (error) {
         console.error("Error fetching timeline data:", error);
     }

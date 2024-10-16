@@ -1,0 +1,195 @@
+[
+    {
+        "title": "Annual Tech Conference",
+        "briefDescription": "A conference for tech enthusiasts.",
+        "longDescription": "Join us for the annual tech conference where industry leaders discuss the latest trends in technology.",
+        "tags": [
+            "Technology",
+            "Conference"
+        ],
+        "timestamp": "2023-10-01T10:00:00Z",
+        "sharepointLinks": [
+            "http://example.com/tech-conference"
+        ]
+    },
+    {
+        "title": "Startup Pitch Night",
+        "briefDescription": "Pitch your startup idea.",
+        "longDescription": "An event where startups pitch their ideas to potential investors.",
+        "tags": [
+            "Startup",
+            "Pitch"
+        ],
+        "timestamp": "2023-10-02T18:00:00Z",
+        "sharepointLinks": [
+            "http://example.com/pitch-night"
+        ]
+    },
+    {
+        "title": "AI Workshop",
+        "briefDescription": "Hands-on AI workshop.",
+        "longDescription": "A workshop to learn about the latest advancements in artificial intelligence.",
+        "tags": [
+            "AI",
+            "Workshop"
+        ],
+        "timestamp": "2023-10-03T09:00:00Z",
+        "sharepointLinks": [
+            "http://example.com/ai-workshop"
+        ]
+    },
+    {
+        "title": "Networking Event",
+        "briefDescription": "Meet industry professionals.",
+        "longDescription": "An event to network with professionals from various industries.",
+        "tags": [
+            "Networking"
+        ],
+        "timestamp": "2023-10-04T17:00:00Z",
+        "sharepointLinks": [
+            "http://example.com/networking"
+        ]
+    },
+    {
+        "title": "Product Launch",
+        "briefDescription": "Launch of our new product.",
+        "longDescription": "Join us for the launch of our latest product.",
+        "tags": [
+            "Product",
+            "Launch"
+        ],
+        "timestamp": "2023-10-05T11:00:00Z",
+        "sharepointLinks": [
+            "http://example.com/product-launch"
+        ]
+    },
+    {
+        "title": "Coding Bootcamp",
+        "briefDescription": "Intensive coding bootcamp.",
+        "longDescription": "A bootcamp to learn coding from scratch.",
+        "tags": [
+            "Coding",
+            "Bootcamp"
+        ],
+        "timestamp": "2023-10-06T08:00:00Z",
+        "sharepointLinks": [
+            "http://example.com/coding-bootcamp"
+        ]
+    },
+    {
+        "title": "Design Thinking Workshop",
+        "briefDescription": "Learn design thinking.",
+        "longDescription": "A workshop to learn the principles of design thinking.",
+        "tags": [
+            "Design",
+            "Workshop"
+        ],
+        "timestamp": "2023-10-07T10:00:00Z",
+        "sharepointLinks": [
+            "http://example.com/design-thinking"
+        ]
+    },
+    {
+        "title": "Hackathon",
+        "briefDescription": "24-hour hackathon.",
+        "longDescription": "A 24-hour hackathon to build innovative solutions.",
+        "tags": [
+            "Hackathon"
+        ],
+        "timestamp": "2023-10-08T12:00:00Z",
+        "sharepointLinks": [
+            "http://example.com/hackathon"
+        ]
+    },
+    {
+        "title": "Marketing Seminar",
+        "briefDescription": "Seminar on digital marketing.",
+        "longDescription": "A seminar to learn about the latest trends in digital marketing.",
+        "tags": [
+            "Marketing",
+            "Seminar"
+        ],
+        "timestamp": "2023-10-09T14:00:00Z",
+        "sharepointLinks": [
+            "http://example.com/marketing-seminar"
+        ]
+    },
+    {
+        "title": "Blockchain Meetup",
+        "briefDescription": "Meetup for blockchain enthusiasts.",
+        "longDescription": "A meetup to discuss the latest developments in blockchain technology.",
+        "tags": [
+            "Blockchain",
+            "Meetup"
+        ],
+        "timestamp": "2023-10-10T16:00:00Z",
+        "sharepointLinks": [
+            "http://example.com/blockchain-meetup"
+        ]
+    },
+    {
+        "title": "Cybersecurity Conference",
+        "briefDescription": "Conference on cybersecurity.",
+        "longDescription": "A conference to discuss the latest trends and challenges in cybersecurity.",
+        "tags": [
+            "Cybersecurity",
+            "Conference"
+        ],
+        "timestamp": "2023-10-11T09:00:00Z",
+        "sharepointLinks": [
+            "http://example.com/cybersecurity-conference"
+        ]
+    },
+    {
+        "title": "Data Science Workshop",
+        "briefDescription": "Workshop on data science.",
+        "longDescription": "A workshop to learn about data science and its applications.",
+        "tags": [
+            "Data Science",
+            "Workshop"
+        ],
+        "timestamp": "2023-10-12T10:00:00Z",
+        "sharepointLinks": [
+            "http://example.com/data-science-workshop"
+        ]
+    },
+    {
+        "title": "Entrepreneurship Summit",
+        "briefDescription": "Summit for entrepreneurs.",
+        "longDescription": "A summit to discuss the challenges and opportunities in entrepreneurship.",
+        "tags": [
+            "Entrepreneurship",
+            "Summit"
+        ],
+        "timestamp": "2023-10-13T11:00:00Z",
+        "sharepointLinks": [
+            "http://example.com/entrepreneurship-summit"
+        ]
+    },
+    {
+        "title": "Virtual Reality Expo",
+        "briefDescription": "Expo on virtual reality.",
+        "longDescription": "An expo to showcase the latest advancements in virtual reality.",
+        "tags": [
+            "Virtual Reality",
+            "Expo"
+        ],
+        "timestamp": "2023-10-14T12:00:00Z",
+        "sharepointLinks": [
+            "http://example.com/vr-expo"
+        ]
+    },
+    {
+        "title": "Fintech Forum",
+        "briefDescription": "Forum on financial technology.",
+        "longDescription": "A forum to discuss the latest trends in financial technology.",
+        "tags": [
+            "Fintech",
+            "Forum"
+        ],
+        "timestamp": "2023-10-15T13:00:00Z",
+        "sharepointLinks": [
+            "http://example.com/fintech-forum"
+        ]
+    }
+]

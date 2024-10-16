@@ -2,12 +2,12 @@ import express from "express";
 import { DBHandler, PendingApprovalEvent } from "../db";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import cors from "cors";
 
 export const app = express();
 
 app.use(express.json());
-
-app.use(express.json());
+app.use(cors());
 
 app.post("/api/admin/login", async (req, res) => {
     const { adminKey } = req.body;
@@ -43,23 +43,30 @@ app.get("/api", (req, res) => {
     res.status(200).type("text/plain").send("API is up.");
 });
 
-app.get("/api/event:id", (req, res) => {
-    const eventID = req.params.id;
-    const data = DBHandler.getInstance().getEventById(eventID as string);
-    if (data === null) {
-        res.status(404).send("Invalid event ID.");
-    } else {
-        res.status(200).json(data);
-    }
+app.get("/api/event/all", async (req, res) => {
+    // IMPORTANT: Disable this api on deployment
+    const data = await DBHandler.getInstance().getAllEvents();
+    res.status(200).json(data);
 });
 
-app.get("/api/event", (req, res) => {
-    const query = req.query.q;
-    const data = DBHandler.getInstance().getEventByName(query as string);
-    if (data === null) {
-        res.status(404).send("No events found.");
+app.get("/api/event", async (req, res) => {
+    const eventId = req.query.id as string;
+
+    if (eventId) {
+        const data = await DBHandler.getInstance().getEventById(eventId);
+        if (data === null) {
+            res.status(404).send("Invalid event ID.");
+        } else {
+            res.status(200).json(data);
+        }
     } else {
-        res.status(200).json(data);
+        const query = req.query.q as string;
+        const data = await DBHandler.getInstance().getEventByName(query);
+        if (data === null) {
+            res.status(404).send("No events found.");
+        } else {
+            res.status(200).json(data);
+        }
     }
 });
 

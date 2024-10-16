@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
-        "serve": "node dist/index.js",
+        "serve": "cp src/.env dist; node dist/index.js",
         "lint": "eslint",
         "format": "prettier --write ."
     },
@@ -11,8 +11,8 @@
     "license": "LGPL-3.0-or-later",
     "description": "",
     "dependencies": {
-        "@types/express": "^4.17.21",
         "bcrypt": "^5.1.1",
+        "cors": "^2.8.5",
         "csv-parser": "^3.0.0",
         "dotenv": "^16.4.5",
         "express": "^4.19.2",
@@ -20,6 +20,8 @@
         "mongoose": "^8.5.4"
     },
     "devDependencies": {
+        "@types/cors": "^2.8.17",
+        "@types/express": "^4.17.21",
         "@eslint/js": "^9.11.1",
         "@types/bcrypt": "^5.0.2",
         "@types/jsonwebtoken": "^9.0.7",

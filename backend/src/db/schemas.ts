@@ -27,6 +27,7 @@ const eventSchema = new Schema({
 });
 
 // export const Node = mongoose.model("nodes", nodeSchema);
+
 export const Event = mongoose.model("Event", eventSchema);
 export const PendingApprovalEvent = mongoose.model(
     "PendingApprovalEvent",

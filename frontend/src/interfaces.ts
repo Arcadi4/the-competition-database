@@ -1,6 +1,9 @@
 export interface ITimelineNode {
     id: number;
     title: string;
-    description: string;
-    date: Date;
+    briefDescription: string;
+    longDescription: string;
+    tags: string[];
+    timestamp: string;
+    sharepointLinks: string[];
 }
