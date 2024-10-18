@@ -4,8 +4,9 @@
             <p style="line-height: 0">{{ weekday }}</p>
             <h1 style="line-height: 0">{{ monthday }}</h1>
         </div>
-        <n-card :title="title" hoverable size="small">
-            {{ description }}
+        <n-card hoverable size="small">
+            <div v-html="title"></div>
+            <div v-html="description"></div>
         </n-card>
     </n-flex>
 </template>
@@ -13,7 +14,7 @@
 <script lang="ts" setup>
 import { defineProps } from "vue";
 
-defineProps({
+const props = defineProps({
     title: String,
     description: String,
     weekday: String,

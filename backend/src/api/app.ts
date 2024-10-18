@@ -66,11 +66,7 @@ app.get("/api/event", async (req, res) => {
             return;
         }
         const data = await DBHandler.getInstance().queryEvents(query);
-        if (data && data.length > 0) {
-            res.status(200).json(data);
-        } else {
-            res.status(404).send("No events found.");
-        }
+        res.status(200).json(data);
     }
 });
 

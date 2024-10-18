@@ -1,52 +1,25 @@
 <template>
-    <n-flex ref="timelineContainer" class="timeline-container" vertical>
-        <timeline-node
-            v-for="node in events"
-            :key="node.id"
-            :description="node.briefDescription"
-            :monthday="formatMonthday(node.timestamp)"
-            :title="node.title"
-            :weekday="formatWeekday(node.timestamp)"
-        />
-    </n-flex>
+    <timeline-nodes :events="allEvents" />
 </template>
 
 <script lang="ts" setup>
-import TimelineNode from "@/components/TimelineNode.vue";
 import { onMounted, ref } from "vue";
 import axios from "axios";
 import { IEvent } from "@/interfaces";
 import { apiUrl } from "@/main";
-import { formatMonthday, formatWeekday } from "@/utilities";
+import TimelineNodes from "@/components/TimelineNodes.vue";
 
-const events = ref<IEvent[]>([]);
-const timelineContainer = ref<HTMLElement | null>(null);
+// TODO: Use dynamic loading rather than loading all events at once
+
+const allEvents = ref<IEvent[]>([]);
 
 onMounted(async () => {
     const response = await axios.get(`${apiUrl}/api/event/all`);
-    events.value = response.data.map((node: IEvent, index: number) => ({
+    allEvents.value = response.data.map((node: IEvent, index: number) => ({
         ...node,
         id: index + 1,
     }));
 });
 </script>
 
-<style scoped>
-.timeline-container {
-    position: relative;
-    left: 80px;
-    width: calc(100% - 120px);
-    max-width: 768px;
-}
-
-.timeline-container::before {
-    content: "";
-    position: absolute;
-    left: -35px;
-    top: 0;
-    width: 2px;
-    height: 100%;
-    background-color: #eeeeee;
-    border-radius: 1px;
-}
-</style>
+<style></style>

@@ -38,7 +38,7 @@ export class DBHandler {
         return Event.findById(id);
     }
 
-    public async queryEvents(query: string): Promise<JSON[] | null> {
+    public async queryEvents(query: string): Promise<JSON[]> {
         console.log(`Event fetching with query: ${query}`);
         return Event.find({
             $or: [

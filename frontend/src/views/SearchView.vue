@@ -1,10 +1,14 @@
 <template>
-    <n-flex style="width: 768px" vertical>
-        <n-input-group style="display: flex; align-content: center; width: 50%">
+    <n-flex :size="[0, 20]" style="width: 768px" vertical>
+        <n-input-group style="margin: 0 auto; width: 50%">
             <n-input
-                v-model:value="keywords"
+                v-model:value="keyword"
+                autofocus
+                passively-activated
                 placeholder="Keywords..."
+                @input="search"
             ></n-input>
+
             <n-button
                 :render-icon="() => h(Search)"
                 focusable
@@ -12,57 +16,77 @@
                 @click="search"
             />
         </n-input-group>
-        <n-flex class="timeline-container" vertical>
-            <timeline-node
-                v-for="event in events"
-                :key="event.id"
-                :description="event.briefDescription"
-                :monthday="formatMonthday(event.timestamp)"
-                :title="event.title"
-                :weekday="formatWeekday(event.timestamp)"
-            />
-        </n-flex>
+        <timeline-nodes :events="highlightedResults" />
+        <n-empty
+            :style="{ display: noResult }"
+            description="No Results"
+            size="large"
+            style="margin: 0 auto"
+        >
+            <template #icon>
+                <n-icon>
+                    <file-failed-one />
+                </n-icon>
+            </template>
+        </n-empty>
     </n-flex>
 </template>
 
 <script lang="ts" setup>
-import { Search } from "@icon-park/vue-next";
-import { h, ref } from "vue";
+import { FileFailedOne, Search } from "@icon-park/vue-next";
+import { computed, h, ref, watch } from "vue";
 import axios from "axios";
 import { apiUrl } from "@/main";
-import TimelineNode from "@/components/TimelineNode.vue";
-import { formatMonthday, formatWeekday } from "@/utilities";
 import { IEvent } from "@/interfaces";
+import TimelineNodes from "@/components/TimelineNodes.vue";
 
-const events = ref<IEvent[]>([]);
-const keywords = ref("");
+const searchResults = ref<IEvent[]>([]);
+const keyword = ref("");
+const noResult = ref<"none" | "">("none");
 
-// TODO: Fix the UI
+const highlightedResults = computed(() => {
+    const keywordRegex = new RegExp(`(${keyword.value})`, "gi");
+    return searchResults.value.map((event) => {
+        return {
+            ...event,
+            title: event.title.replace(
+                keywordRegex,
+                '<span class="highlight">$1</span>'
+            ),
+            briefDescription: event.briefDescription.replace(
+                keywordRegex,
+                '<span class="highlight">$1</span>'
+            ),
+            longDescription: event.longDescription.replace(
+                keywordRegex,
+                '<span class="highlight">$1</span>'
+            ),
+        };
+    });
+});
+
 // TODO: Keyword highlighting
 
 const search = async () => {
-    const response = await axios.get(`${apiUrl}/api/event?q=${keywords.value}`);
-    events.value = response.data.map((node, index) => ({
-        ...node,
+    const response = await axios.get(`${apiUrl}/api/event?q=${keyword.value}`);
+    searchResults.value = response.data.map((event: IEvent, index: number) => ({
+        ...event,
         id: index + 1,
     }));
 };
+
+watch(searchResults, (newVal) => {
+    if (keyword.value !== "" && newVal.length === 0) {
+        noResult.value = "";
+    } else {
+        noResult.value = "none";
+    }
+});
 </script>
 
 <style>
-.timeline-container {
-    position: relative;
-    left: 80px;
-}
-
-.timeline-container::before {
-    content: "";
-    position: absolute;
-    left: -35px;
-    top: 0;
-    width: 2px;
-    height: 100%;
-    background-color: #eeeeee;
-    border-radius: 1px;
+.highlight {
+    color: forestgreen;
+    font-weight: bolder;
 }
 </style>
