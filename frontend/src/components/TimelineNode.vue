@@ -14,6 +14,7 @@
 <script lang="ts" setup>
 import { defineProps } from "vue";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const props = defineProps({
     title: String,
     description: String,

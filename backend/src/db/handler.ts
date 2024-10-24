@@ -33,6 +33,9 @@ export class DBHandler {
         return Event.find({ timestamp: { $gte: start, $lte: end } });
     }
 
+    // TODO: Implement this function
+    // public async getTodayEvents(): Promise<JSON[]> {}
+
     public async getEventById(id: string): Promise<JSON | null> {
         console.log(`Event fetching with id: ${id}`);
         return Event.findById(id);

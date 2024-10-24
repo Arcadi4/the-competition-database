@@ -62,6 +62,8 @@ import { onMounted, onUnmounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { menuOptions } from "./views/menuOptions";
 
+// TODO: THIS FILE IS A MESS
+
 const route = useRoute();
 const activeKey = ref("");
 
