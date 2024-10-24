@@ -58,7 +58,12 @@ export const menuOptions: MenuOption[] = [
             }),
     },
     {
-        label: () => h(RouterLink),
+        label: () =>
+            h(
+                RouterLink,
+                { to: { name: "login" } },
+                { default: () => "Login" }
+            ),
         key: "login",
         icon: () =>
             h(People, {
