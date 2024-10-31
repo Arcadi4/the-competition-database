@@ -14,7 +14,7 @@
                     />
                     <n-input
                         clearable
-                        placeholder="Descriptoin"
+                        placeholder="Description"
                         rows="10"
                         type="textarea"
                     />
