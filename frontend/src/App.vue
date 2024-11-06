@@ -36,7 +36,7 @@
                     ref="headerRef"
                     bordered
                     position="absolute"
-                    style="z-index: 10; width: 100%; top: 0"
+                    style="z-index: 10; width: 100%; top: 0; height: 100px"
                 >
                     <div style="padding: 20px">
                         <h2 style="line-height: 0">{{ date }}</h2>
@@ -46,7 +46,7 @@
                 <n-layout-content
                     bordered
                     content-class="router-view"
-                    content-style="display: flex; justify-content: center; padding: 20px; margin-top: 100px; overflow-y: auto"
+                    content-style="display: flex; justify-content: center; margin-top: 100px; overflow-y: auto"
                 >
                     <router-view class="router-view" />
                 </n-layout-content>
