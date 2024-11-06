@@ -51,7 +51,7 @@ onMounted(async () => {
     const response = await axios.get(`${apiUrl}/api/event/all`);
     allEvents.value = response.data.map((node: IEvent, index: number) => ({
         ...node,
-        id: index + 1,
+        id: node._id,
     }));
 });
 </script>
