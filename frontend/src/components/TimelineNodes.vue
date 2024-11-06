@@ -2,7 +2,7 @@
     <n-flex class="timeline-container" vertical>
         <timeline-node
             v-for="event in props.events"
-            :key="event.id"
+            :key="event._id"
             :description="event.briefDescription"
             :monthday="formatMonthday(event.timestamp)"
             :title="event.title"
@@ -26,19 +26,19 @@ const props = defineProps<{
 <style scoped>
 .timeline-container {
     position: relative;
-    left: 80px;
-    width: calc(100% - 120px);
+    left: 60px;
+    width: calc(100% - 80px);
     max-width: 768px;
 }
 
 .timeline-container::before {
     content: "";
     position: absolute;
-    left: -35px;
     top: 0;
+    left: -35px;
     width: 2px;
+    border-radius: 1px;
     height: 100%;
     background-color: #eeeeee;
-    border-radius: 1px;
 }
 </style>

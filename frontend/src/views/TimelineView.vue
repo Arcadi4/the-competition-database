@@ -1,5 +1,39 @@
 <template>
-    <timeline-nodes :events="allEvents" />
+    <n-split
+        :default-size="0.67"
+        :max="0.75"
+        :min="0.34"
+        direction="horizontal"
+        style="height: calc(100vh - 100px)"
+    >
+        <template #1>
+            <n-layout>
+                <n-layout-content
+                    :native-scrollbar="false"
+                    content-style="
+                                  max-width: 768px;
+                                  padding: 20px;
+                                  height: calc(100vh - 100px);
+                "
+                >
+                    <timeline-nodes :events="allEvents" />
+                </n-layout-content>
+            </n-layout>
+        </template>
+        <template #2>
+            <n-layout>
+                <n-layout-content
+                    content-style="
+                max-width: 768px;
+                padding: 20px;
+                height: calc(100vh - 100px);
+                "
+                >
+                    <n-empty description="Click on events to show detail" />
+                </n-layout-content>
+            </n-layout>
+        </template>
+    </n-split>
 </template>
 
 <script lang="ts" setup>
@@ -7,7 +41,7 @@ import { onMounted, ref } from "vue";
 import axios from "axios";
 import { IEvent } from "@/interfaces";
 import { apiUrl } from "@/main";
-import TimelineNodes from "@/components/TimelineNodes.vue";
+import TimelineNodes from "@/components/TimelineNodes.vue"; // TODO: Use dynamic loading rather than loading all events at once
 
 // TODO: Use dynamic loading rather than loading all events at once
 
