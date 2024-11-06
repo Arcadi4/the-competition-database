@@ -14,7 +14,7 @@
                     :collapsed="sideBarCollapsed"
                     :collapsed-icon-size="24"
                     :collapsed-width="64"
-                    :icon-size="16"
+                    :icon-size="20"
                     :options="menuOptions"
                     :value="activeKey"
                 />
@@ -30,14 +30,13 @@
             <n-layout
                 ref="headerLayoutRef"
                 :native-scrollbar="false"
-                :on-scroll="headerScrollHandler"
                 content-class="router-view"
             >
                 <n-layout-header
                     ref="headerRef"
-                    :position="headerPosition"
                     bordered
-                    style="z-index: 10"
+                    position="absolute"
+                    style="z-index: 10; width: 100%; top: 0"
                 >
                     <div style="padding: 20px">
                         <h2 style="line-height: 0">{{ date }}</h2>
@@ -47,7 +46,7 @@
                 <n-layout-content
                     bordered
                     content-class="router-view"
-                    content-style="display: flex; justify-content: center; padding: 20px 0px"
+                    content-style="display: flex; justify-content: center; padding: 20px; margin-top: 100px; overflow-y: auto"
                 >
                     <router-view class="router-view" />
                 </n-layout-content>
@@ -61,8 +60,6 @@ import { Left, Right } from "@icon-park/vue-next";
 import { onMounted, onUnmounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { menuOptions } from "./views/menuOptions";
-
-// TODO: THIS FILE IS A MESS
 
 const route = useRoute();
 const activeKey = ref("");
@@ -98,29 +95,9 @@ onMounted(() => {
 onUnmounted(() => {
     clearInterval(intervalId);
 });
-
-const headerLayoutRef = ref<HTMLElement | null>(null);
-const headerPosition = ref<"absolute" | "static">("static");
-const headerRef = ref<HTMLElement | null>(null);
-
-const headerScrollHandler = () => {
-    console.log(headerLayoutRef.value.scrollbarInstRef.containerScrollTop);
-    console.log(headerRef.value);
-    if (
-        headerLayoutRef.value?.scrollbarInstRef.containerScrollTop &&
-        headerLayoutRef.value.scrollbarInstRef.containerScrollTop > 50
-    ) {
-        headerPosition.value = "absolute";
-    } else {
-        headerPosition.value = "static";
-    }
-};
 </script>
 
 <style lang="scss">
-// Font Space Grotesk
-// This seems to be working in Mainland China
-// Maybe consider adding a fallback url if needed
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
 
 #app {

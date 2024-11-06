@@ -1,10 +1,6 @@
 <template>
     <n-layout style="max-width: 768px">
-        <n-layout-content
-            :native-scrollbar="false"
-            content-style="padding: 20px"
-            style="margin: 0 auto"
-        >
+        <n-layout-content :native-scrollbar="false" style="margin: 0 auto">
             <n-card style="width: 500px; margin: 0 auto">
                 <h1 style="margin-top: 0">Login</h1>
                 <n-flex vertical>
