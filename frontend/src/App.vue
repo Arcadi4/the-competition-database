@@ -1,57 +1,59 @@
 <template>
     <n-config-provider>
-        <n-layout has-sider position="absolute" style="max-height: 100%">
-            <n-layout-sider
-                :collapsed="sideBarCollapsed"
-                :collapsed-width="64"
-                :width="256"
-                bordered
-                collapse-mode="width"
-                @collapse="sideBarCollapsed = true"
-                @expand="sideBarCollapsed = false"
-            >
-                <n-menu
+        <n-message-provider>
+            <n-layout has-sider position="absolute" style="max-height: 100%">
+                <n-layout-sider
                     :collapsed="sideBarCollapsed"
-                    :collapsed-icon-size="24"
                     :collapsed-width="64"
-                    :icon-size="20"
-                    :options="menuOptions"
-                    :value="activeKey"
-                />
-                <n-button
-                    circle
-                    class="collapse-button"
-                    @click="collapseSideBar"
-                >
-                    <left v-if="!sideBarCollapsed" />
-                    <right v-if="sideBarCollapsed" />
-                </n-button>
-            </n-layout-sider>
-            <n-layout
-                ref="headerLayoutRef"
-                :native-scrollbar="false"
-                content-class="router-view"
-            >
-                <n-layout-header
-                    ref="headerRef"
+                    :width="256"
                     bordered
-                    position="absolute"
-                    style="z-index: 10; width: 100%; top: 0; height: 100px"
+                    collapse-mode="width"
+                    @collapse="sideBarCollapsed = true"
+                    @expand="sideBarCollapsed = false"
                 >
-                    <div style="padding: 20px">
-                        <h2 style="line-height: 0">{{ date }}</h2>
-                        {{ time }}
-                    </div>
-                </n-layout-header>
-                <n-layout-content
-                    bordered
+                    <n-menu
+                        :collapsed="sideBarCollapsed"
+                        :collapsed-icon-size="24"
+                        :collapsed-width="64"
+                        :icon-size="20"
+                        :options="menuOptions"
+                        :value="activeKey"
+                    />
+                    <n-button
+                        circle
+                        class="collapse-button"
+                        @click="collapseSideBar"
+                    >
+                        <left v-if="!sideBarCollapsed" />
+                        <right v-if="sideBarCollapsed" />
+                    </n-button>
+                </n-layout-sider>
+                <n-layout
+                    ref="headerLayoutRef"
+                    :native-scrollbar="false"
                     content-class="router-view"
-                    content-style="display: flex; justify-content: center; margin-top: 100px; overflow-y: auto"
                 >
-                    <router-view class="router-view" />
-                </n-layout-content>
+                    <n-layout-header
+                        ref="headerRef"
+                        bordered
+                        position="absolute"
+                        style="z-index: 10; width: 100%; top: 0; height: 100px"
+                    >
+                        <div style="padding: 20px">
+                            <h2 style="line-height: 0">{{ date }}</h2>
+                            {{ time }}
+                        </div>
+                    </n-layout-header>
+                    <n-layout-content
+                        bordered
+                        content-class="router-view"
+                        content-style="display: flex; justify-content: center; margin-top: 100px; overflow-y: auto"
+                    >
+                        <router-view class="router-view" />
+                    </n-layout-content>
+                </n-layout>
             </n-layout>
-        </n-layout>
+        </n-message-provider>
     </n-config-provider>
 </template>
 
