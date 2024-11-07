@@ -1,35 +1,36 @@
 <template>
-    <n-flex :size="[0, 20]" style="width: 768px" vertical>
-        <n-input-group style="margin: 0 auto; width: 50%">
-            <n-input
-                v-model:value="keyword"
-                autofocus
-                passively-activated
-                placeholder="Keywords..."
-                @input="search"
-            ></n-input>
+    <div style="max-width: 768px; margin: 0 auto; padding-top: 40px">
+        <n-flex :size="40" align="center" justify="center" vertical>
+            <n-input-group style="width: 50%">
+                <n-input
+                    v-model:value="keyword"
+                    autofocus
+                    passively-activated
+                    placeholder="Keywords..."
+                    @input="search"
+                ></n-input>
 
-            <n-button
-                :render-icon="() => h(Search)"
-                focusable
-                type="primary"
-                @click="search"
-            />
-        </n-input-group>
-        <timeline-nodes :events="highlightedResults" />
-        <n-empty
-            :style="{ display: noResult }"
-            description="No Results"
-            size="large"
-            style="margin: 0 auto"
-        >
-            <template #icon>
-                <n-icon>
-                    <file-failed-one />
-                </n-icon>
-            </template>
-        </n-empty>
-    </n-flex>
+                <n-button
+                    :render-icon="() => h(Search)"
+                    focusable
+                    type="primary"
+                    @click="search"
+                />
+            </n-input-group>
+            <timeline-nodes :events="highlightedResults" />
+            <n-empty
+                :style="{ display: noResult }"
+                description="No Results"
+                size="large"
+            >
+                <template #icon>
+                    <n-icon>
+                        <file-failed-one />
+                    </n-icon>
+                </template>
+            </n-empty>
+        </n-flex>
+    </div>
 </template>
 
 <script lang="ts" setup>

@@ -45,11 +45,14 @@
                         </div>
                     </n-layout-header>
                     <n-layout-content
+                        :native-scrollbar="false"
                         bordered
-                        content-class="router-view"
-                        content-style="display: flex; justify-content: center; margin-top: 100px; overflow-y: auto"
+                        content-style="overflow-y: auto"
+                        embedded
+                        position="absolute"
+                        style="top: 100px; right: 0"
                     >
-                        <router-view class="router-view" />
+                        <router-view />
                     </n-layout-content>
                 </n-layout>
             </n-layout>

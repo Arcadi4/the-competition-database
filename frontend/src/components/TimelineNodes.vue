@@ -1,5 +1,9 @@
 <template>
-    <n-flex class="timeline-container" vertical>
+    <n-flex
+        class="timeline-container"
+        style="position: relative; left: 60px; width: calc(100% - 80px)"
+        vertical
+    >
         <timeline-node
             v-for="event in props.events"
             :key="event._id"
@@ -24,13 +28,6 @@ const props = defineProps<{
 </script>
 
 <style scoped>
-.timeline-container {
-    position: relative;
-    left: 60px;
-    width: calc(100% - 80px);
-    max-width: 768px;
-}
-
 .timeline-container::before {
     content: "";
     position: absolute;

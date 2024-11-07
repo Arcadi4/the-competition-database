@@ -15,6 +15,7 @@
                                   padding: 20px;
                                   height: calc(100vh - 100px);
                 "
+                    embedded
                 >
                     <timeline-nodes :events="allEvents" />
                 </n-layout-content>
