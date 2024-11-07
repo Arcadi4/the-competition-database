@@ -39,7 +39,7 @@
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
 import axios from "axios";
-import { IEvent } from "@/interfaces";
+import { IEvent } from "@/types";
 import { apiUrl } from "@/main";
 import TimelineNodes from "@/components/TimelineNodes.vue"; // TODO: Use dynamic loading rather than loading all events at once
 

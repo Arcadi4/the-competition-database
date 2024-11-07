@@ -14,7 +14,7 @@
 <script lang="ts" setup>
 import TimelineNode from "@/components/TimelineNode.vue";
 import { defineProps } from "vue";
-import { IEvent } from "@/interfaces";
+import { IEvent } from "@/types";
 import { formatMonthday, formatWeekday } from "@/utilities";
 
 // eslint-disable-next-line

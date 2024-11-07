@@ -37,7 +37,7 @@ import { FileFailedOne, Search } from "@icon-park/vue-next";
 import { computed, h, ref, watch } from "vue";
 import axios from "axios";
 import { apiUrl } from "@/main";
-import { IEvent } from "@/interfaces";
+import { IEvent } from "@/types";
 import TimelineNodes from "@/components/TimelineNodes.vue";
 
 const searchResults = ref<IEvent[]>([]);
