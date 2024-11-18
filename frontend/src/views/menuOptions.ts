@@ -1,4 +1,4 @@
-import { DocAdd, HomeTwo, Info, People, Search } from "@icon-park/vue-next";
+import { DocAdd, HomeTwo, Info, Search } from "@icon-park/vue-next";
 import { MenuOption } from "naive-ui";
 import { h } from "vue";
 import { RouterLink } from "vue-router";
@@ -57,19 +57,19 @@ export const menuOptions: MenuOption[] = [
                 style: IconStyle,
             }),
     },
-    {
-        label: () =>
-            h(
-                RouterLink,
-                { to: { name: "login" } },
-                { default: () => "Login" }
-            ),
-        key: "login",
-        icon: () =>
-            h(People, {
-                style: IconStyle,
-            }),
-    },
+    // {
+    //     label: () =>
+    //         h(
+    //             RouterLink,
+    //             { to: { name: "login" } },
+    //             { default: () => "Login" }
+    //         ),
+    //     key: "login",
+    //     icon: () =>
+    //         h(People, {
+    //             style: IconStyle,
+    //         }),
+    // },
 ];
 
 const IconStyle = {
