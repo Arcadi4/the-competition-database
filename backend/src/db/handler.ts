@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { Event, PendingApprovalEvent } from "./schemas";
+import { EventId, IEventData, IFrontendEvent } from "../types";
 
 export class DBHandler {
     private static _instance: DBHandler;
@@ -36,8 +37,11 @@ export class DBHandler {
     // TODO: Implement this function
     // public async getTodayEvents(): Promise<JSON[]> {}
 
-    public async getEventById(id: string): Promise<JSON | null> {
+    public async getEventById(id: EventId): Promise<JSON | null> {
         console.log(`Event fetching with id: ${id}`);
+        if (!mongoose.isValidObjectId(id)) {
+            return null;
+        }
         return Event.findById(id);
     }
 
@@ -52,22 +56,53 @@ export class DBHandler {
         });
     }
 
-    public async addPendingApprovalEvent(event: JSON): Promise<string> {
+    public async addPendingApprovalEvent(
+        eventData: IFrontendEvent
+    ): Promise<mongoose.Types.ObjectId> {
+        const event = this.frontendEventTransform(eventData);
         const newEvent = new PendingApprovalEvent(event);
         await newEvent.save();
         console.log(`Added new pending approval event with id: ${newEvent.id}`);
-        return newEvent.id;
+        return newEvent._id;
     }
 
-    public async approveEvent(id: string): Promise<string | null> {
+    public async approveEvent(
+        id: EventId
+    ): Promise<mongoose.Types.ObjectId | null> {
+        const pendingEvent = await PendingApprovalEvent.findById(id);
+        if (!pendingEvent) {
+            return null;
+        }
+        const approvedEvent = new Event(pendingEvent);
+        await approvedEvent.save();
+        await PendingApprovalEvent.findByIdAndDelete(id);
+        console.log(`Approved event with id: ${id}`);
+        return approvedEvent._id;
+    }
+
+    public async rejectEvent(
+        id: EventId
+    ): Promise<mongoose.Types.ObjectId | null> {
+        if (!mongoose.isValidObjectId(id)) {
+            return null;
+        }
         const event = await PendingApprovalEvent.findById(id);
         if (!event) {
             return null;
         }
-        const newEvent = new Event(event);
-        await newEvent.save();
-        console.log(`Approved event with id: ${id}`);
         await PendingApprovalEvent.findByIdAndDelete(id);
-        return newEvent.id;
+        console.log(`Rejected event with id: ${id}`);
+        return event._id;
+    }
+
+    private frontendEventTransform(eventData: IFrontendEvent): IEventData {
+        return {
+            title: eventData.title,
+            briefDescription: eventData.briefDescription,
+            longDescription: eventData.longDescription,
+            tags: eventData.tags,
+            timestamp: new Date(eventData.timestamp),
+            sharepointLinks: eventData.sharepointLinks,
+        };
     }
 }
