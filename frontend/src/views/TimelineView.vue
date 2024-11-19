@@ -55,6 +55,8 @@ onMounted(async () => {
         id: node._id,
     }));
 });
+
+// const selectedEvent : IEvent;
 </script>
 
 <style></style>

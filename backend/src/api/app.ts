@@ -49,7 +49,7 @@ app.get("/api", (req, res) => {
 });
 
 app.get("/api/event/all", async (req, res) => {
-    // IMPORTANT: Disable this api on deployment
+    // TODO: IMPORTANT: Disable this api in later versions
     const data = await DBHandler.getInstance().getAllEvents();
     res.status(200).json(data);
 });
