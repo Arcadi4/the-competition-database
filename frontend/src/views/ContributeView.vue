@@ -71,7 +71,7 @@ const formValue = ref<IEventSubmission>({
     briefDescription: "",
     longDescription: "",
     tags: [],
-    timestamp: 0,
+    timestamp: Date.now().valueOf(),
 });
 
 const rules = {
@@ -95,12 +95,36 @@ const rules = {
             message: "A description is required",
             trigger: ["input", "blur"],
         },
+        {
+            trigger: ["blur"],
+            level: "warning",
+            validator: (_rule: FormItemRule, value: string) => {
+                if (value.length < 100) {
+                    return new Error("Consider a more detailed description");
+                }
+                return true;
+            },
+        },
     ],
+    tags: [],
     timestamp: [
         {
             required: true,
+            type: "number",
             message: "A date is required",
-            trigger: ["input", "blur"],
+            trigger: ["blur"],
+        },
+        {
+            trigger: ["blur"],
+            level: "warning",
+            validator: (_rule: FormItemRule, value: number) => {
+                if (value < Date.now().valueOf() - 86400000) {
+                    return new Error(
+                        "This is an past event, but you are still welcome to contribute"
+                    );
+                }
+                return true;
+            },
         },
     ],
 };
