@@ -1,5 +1,5 @@
 <template>
-    <div style="max-width: 768px; margin: 0 auto; padding-top: 40px">
+    <div style="max-width: 768px; margin: 40px auto">
         <n-flex :size="40" align="center" justify="center" vertical>
             <n-input-group style="width: 50%">
                 <n-input
