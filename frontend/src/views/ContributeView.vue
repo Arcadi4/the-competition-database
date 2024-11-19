@@ -62,7 +62,7 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { EventTags, IEventSubmission } from "@/types";
-import type { FormInst } from "naive-ui";
+import type { FormInst, FormItemRule } from "naive-ui";
 import axios from "axios";
 
 const formRef = ref<FormInst | null>(null);
@@ -115,15 +115,17 @@ const tags = Object.keys(EventTags)
 const verifyAndSubmitEvent = (e: MouseEvent) => {
     e.preventDefault();
     console.log(formValue.value);
-    console.log("veryfing event");
     // There is a crash caused by the following line
-    formRef.value?.validate((err) => {
-        if (!err) {
-            axios.post("/api/event/add", formValue.value);
-        } else {
-            console.log(err);
-        }
-    });
+    formRef.value
+        ?.validate((errors) => {
+            if (!errors) {
+                console.log("Event submitted");
+                axios.post("/api/event/add", formValue.value);
+            }
+        })
+        .catch((err) => {
+            console.error(`Event submission failed due to: ${err}`);
+        });
 };
 </script>
 
