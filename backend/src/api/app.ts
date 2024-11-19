@@ -1,7 +1,6 @@
 import express from "express";
 import { DBHandler, PendingApprovalEvent } from "../db";
 import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
 import cors from "cors";
 
 export const app = express();
@@ -12,28 +11,34 @@ app.use(cors());
 app.post("/api/admin/login", async (req, res) => {
     const { adminKey } = req.body;
 
-    if (!process.env.ADMIN_KEY || !process.env.JWT_SECRET) {
-        return res
-            .status(500)
-            .json({ error: "Error configuration on the server side." });
-    }
+    // Temporary disabling the admin login
 
-    const isMatch = bcrypt.compare(adminKey, process.env.ADMIN_KEY);
-    if (!isMatch) {
-        return res.status(403).json({ error: "Wrong admin key." });
-    }
+    return res.status(403);
 
-    const token = jwt.sign({ role: "admin" }, process.env.JWT_SECRET, {
-        expiresIn: "72h",
-    });
-
-    res.json({ token });
+    // if (!process.env.ADMIN_KEY || !process.env.JWT_SECRET) {
+    //     return res
+    //         .status(500)
+    //         .json({ error: "Error configuration on the server side." });
+    // }
+    //
+    // const isMatch = bcrypt.compare(adminKey, process.env.ADMIN_KEY);
+    // if (!isMatch) {
+    //     return res.status(403).json({ error: "Wrong admin key." });
+    // }
+    //
+    // const token = jwt.sign({ role: "admin" }, process.env.JWT_SECRET, {
+    //     expiresIn: "72h",
+    // });
+    //
+    // res.json({ token });
 });
 
 app.get("/", (req, res) => {
     const frontendUrl = process.env.FRONTEND_URL;
     if (!frontendUrl) {
-        res.status(500).send("Error configuration on the server side.");
+        res.status(500).send(
+            "This is the API server. You were supposed to be redirected to the frontend."
+        );
         return;
     }
     res.redirect(frontendUrl);
