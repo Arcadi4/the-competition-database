@@ -4,9 +4,9 @@
             <p style="line-height: 0">{{ weekday }}</p>
             <h1 style="line-height: 0">{{ monthday }}</h1>
         </div>
-        <n-card hoverable size="small">
-            <div v-html="title"></div>
-            <div v-html="description"></div>
+        <n-card hoverable size="small" style="padding: 5px">
+            <div style="font-size: medium; font-weight: bold" v-html="title" />
+            <div v-html="description" />
         </n-card>
     </n-flex>
 </template>
@@ -43,11 +43,6 @@ const props = defineProps({
     height: 8px;
     background-color: #b4b4b4;
     border-radius: 50%;
-}
-
-.timeline-node {
-    display: flex;
-    align-items: stretch;
 }
 
 .side-date-display {

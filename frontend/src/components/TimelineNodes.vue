@@ -4,14 +4,21 @@
         style="position: relative; left: 60px; width: calc(100% - 80px)"
         vertical
     >
-        <timeline-node
-            v-for="event in props.events"
-            :key="event._id"
-            :description="event.briefDescription"
-            :monthday="formatMonthday(event.timestamp)"
-            :title="event.title"
-            :weekday="formatWeekday(event.timestamp)"
-        />
+        <template v-for="(event, index) in props.events" :key="event._id">
+            <h2
+                v-if="isNewMonth(index)"
+                class="month-indicator"
+                style="color: #b4b4b4"
+            >
+                {{ formatMonth(event.timestamp) }}
+            </h2>
+            <timeline-node
+                :description="event.briefDescription"
+                :monthday="formatMonthday(event.timestamp)"
+                :title="event.title"
+                :weekday="formatWeekday(event.timestamp)"
+            />
+        </template>
     </n-flex>
 </template>
 
@@ -19,12 +26,22 @@
 import TimelineNode from "@/components/TimelineNode.vue";
 import { defineProps } from "vue";
 import { IEvent } from "@/types";
-import { formatMonthday, formatWeekday } from "@/utilities";
+import { formatMonth, formatMonthday, formatWeekday } from "@/utilities";
 
 // eslint-disable-next-line
 const props = defineProps<{
     events: IEvent[];
 }>();
+
+const isNewMonth = (index: number) => {
+    if (index === 0) return true;
+    const currentEvent = props.events[index];
+    const previousEvent = props.events[index - 1];
+    return (
+        new Date(currentEvent.timestamp).getMonth() !==
+        new Date(previousEvent.timestamp).getMonth()
+    );
+};
 </script>
 
 <style scoped>
@@ -37,5 +54,10 @@ const props = defineProps<{
     border-radius: 1px;
     height: 100%;
     background-color: #eeeeee;
+}
+
+.month-indicator {
+    font-weight: bold;
+    margin: 10px 0;
 }
 </style>
