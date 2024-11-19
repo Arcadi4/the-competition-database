@@ -78,12 +78,14 @@ app.get("/api/event", async (req, res) => {
 app.post("/api/event/add", (req, res) => {
     const data = req.body;
 
+    console.log(`Frontent attempted adding an event: ${data}`);
+
     try {
         const event = new PendingApprovalEvent(data);
         event.validateSync();
     } catch (err) {
-        res.status(400).json({ error: err });
-        return;
+        console.error(`Event not added: ${err}`);
+        return res.status(400).json({ error: "Invalid event data." });
     }
 
     const eventID = DBHandler.getInstance().addPendingApprovalEvent(data);

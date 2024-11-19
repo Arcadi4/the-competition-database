@@ -64,6 +64,7 @@ import { ref } from "vue";
 import { EventTags, IEventSubmission } from "@/types";
 import type { FormInst, FormItemRule } from "naive-ui";
 import axios from "axios";
+import { apiUrl } from "@/main";
 
 const formRef = ref<FormInst | null>(null);
 const formValue = ref<IEventSubmission>({
@@ -71,7 +72,7 @@ const formValue = ref<IEventSubmission>({
     briefDescription: "",
     longDescription: "",
     tags: [],
-    timestamp: Date.now().valueOf(),
+    timestamp: new Date().setHours(0, 0, 0, 0),
 });
 
 const rules = {
@@ -109,13 +110,7 @@ const rules = {
     tags: [],
     timestamp: [
         {
-            required: true,
-            type: "number",
-            message: "A date is required",
-            trigger: ["blur"],
-        },
-        {
-            trigger: ["blur"],
+            trigger: ["input", "blur"],
             level: "warning",
             validator: (_rule: FormItemRule, value: number) => {
                 if (value < Date.now().valueOf() - 86400000) {
@@ -144,7 +139,12 @@ const verifyAndSubmitEvent = (e: MouseEvent) => {
         ?.validate((errors) => {
             if (!errors) {
                 console.log("Event submitted");
-                axios.post("/api/event/add", formValue.value);
+                console.log(formValue.value);
+                axios
+                    .post(`${apiUrl}/api/event/add`, formValue.value)
+                    .catch((err) => {
+                        console.error(`Event submission failed: ${err}`);
+                    });
             }
         })
         .catch((err) => {
