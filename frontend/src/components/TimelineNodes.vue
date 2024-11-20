@@ -25,6 +25,7 @@
                 :monthday="formatMonthday(event.timestamp)"
                 :title="event.title"
                 :weekday="formatWeekday(event.timestamp)"
+                @click="() => emitEventClick(event)"
             />
         </template>
     </n-flex>
@@ -32,7 +33,7 @@
 
 <script lang="ts" setup>
 import TimelineNode from "@/components/TimelineNode.vue";
-import { defineProps } from "vue";
+import { defineEmits, defineProps } from "vue";
 import { IEvent } from "@/types";
 import {
     formatMonth,
@@ -53,6 +54,12 @@ const isNewMonth = (index: number) => {
         new Date(currentEvent.timestamp).getMonth() !==
         new Date(previousEvent.timestamp).getMonth()
     );
+};
+
+const emit = defineEmits(["event-click"]);
+
+const emitEventClick = (event: IEvent) => {
+    emit("event-click", event);
 };
 </script>
 
