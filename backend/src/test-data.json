@@ -2,129 +2,129 @@
     {
         "title": "Annual Tech Conference",
         "briefDescription": "A conference for tech enthusiasts.",
-        "longDescription": "Join us for the annual tech conference where industry leaders discuss the latest trends in technology.",
+        "longDescription": "Join us for the annual tech conference where industry leaders discuss the latest trends in technology. This event will feature keynote speeches, panel discussions, and networking opportunities with professionals from various tech sectors. Attendees will have the chance to learn about cutting-edge innovations and gain insights into the future of technology.",
         "tags": [
             "Technology",
             "Conference"
         ],
         "timestamp": "2023-10-01T10:00:00Z",
         "sharepointLinks": [
-            "http://example.com/tech-conference"
+            "https://example.com/tech-conference"
         ]
     },
     {
         "title": "Startup Pitch Night",
         "briefDescription": "Pitch your startup idea.",
-        "longDescription": "An event where startups pitch their ideas to potential investors.",
+        "longDescription": "An event where startups pitch their ideas to potential investors. This is a great opportunity for entrepreneurs to showcase their innovative solutions and receive valuable feedback from experienced investors. Participants will also have the chance to network with other startups and industry experts, fostering collaboration and potential partnerships.",
         "tags": [
             "Startup",
             "Pitch"
         ],
         "timestamp": "2023-10-02T18:00:00Z",
         "sharepointLinks": [
-            "http://example.com/pitch-night"
+            "https://example.com/pitch-night"
         ]
     },
     {
         "title": "AI Workshop",
         "briefDescription": "Hands-on AI workshop.",
-        "longDescription": "A workshop to learn about the latest advancements in artificial intelligence.",
+        "longDescription": "A workshop to learn about the latest advancements in artificial intelligence. Participants will engage in hands-on activities and projects, gaining practical experience with AI tools and techniques. The workshop will cover topics such as machine learning, neural networks, and data analysis, providing a comprehensive understanding of AI applications.",
         "tags": [
             "AI",
             "Workshop"
         ],
         "timestamp": "2023-11-03T09:00:00Z",
         "sharepointLinks": [
-            "http://example.com/ai-workshop"
+            "https://example.com/ai-workshop"
         ]
     },
     {
         "title": "Networking Event",
         "briefDescription": "Meet industry professionals.",
-        "longDescription": "An event to network with professionals from various industries.",
+        "longDescription": "An event to network with professionals from various industries. This event provides a platform for attendees to connect with peers, share knowledge, and explore potential business opportunities. Whether you are looking to expand your professional network or seek advice from industry veterans, this event offers valuable interactions and insights.",
         "tags": [
             "Networking"
         ],
         "timestamp": "2023-11-04T17:00:00Z",
         "sharepointLinks": [
-            "http://example.com/networking"
+            "https://example.com/networking"
         ]
     },
     {
         "title": "Product Launch",
         "briefDescription": "Launch of our new product.",
-        "longDescription": "Join us for the launch of our latest product.",
+        "longDescription": "Join us for the launch of our latest product. This event will feature a detailed presentation of the product's features and benefits, followed by a live demonstration. Attendees will have the opportunity to ask questions and interact with the product development team. Don't miss this chance to be among the first to experience our new innovation.",
         "tags": [
             "Product",
             "Launch"
         ],
         "timestamp": "2023-12-05T11:00:00Z",
         "sharepointLinks": [
-            "http://example.com/product-launch"
+            "https://example.com/product-launch"
         ]
     },
     {
         "title": "Coding Bootcamp",
         "briefDescription": "Intensive coding bootcamp.",
-        "longDescription": "A bootcamp to learn coding from scratch.",
+        "longDescription": "A bootcamp to learn coding from scratch. This intensive program is designed for beginners and covers fundamental programming concepts, languages, and tools. Participants will work on real-world projects, gaining hands-on experience and building a strong foundation in coding. By the end of the bootcamp, attendees will be equipped with the skills needed to pursue a career in software development.",
         "tags": [
             "Coding",
             "Bootcamp"
         ],
         "timestamp": "2023-12-06T08:00:00Z",
         "sharepointLinks": [
-            "http://example.com/coding-bootcamp"
+            "https://example.com/coding-bootcamp"
         ]
     },
     {
         "title": "Design Thinking Workshop",
         "briefDescription": "Learn design thinking.",
-        "longDescription": "A workshop to learn the principles of design thinking.",
+        "longDescription": "A workshop to learn the principles of design thinking. Participants will explore the design thinking process, including empathy, ideation, prototyping, and testing. Through interactive exercises and group activities, attendees will develop creative problem-solving skills and learn how to apply design thinking to various challenges. This workshop is ideal for anyone looking to enhance their innovation capabilities.",
         "tags": [
             "Design",
             "Workshop"
         ],
         "timestamp": "2024-01-07T10:00:00Z",
         "sharepointLinks": [
-            "http://example.com/design-thinking"
+            "https://example.com/design-thinking"
         ]
     },
     {
         "title": "Hackathon",
         "briefDescription": "24-hour hackathon.",
-        "longDescription": "A 24-hour hackathon to build innovative solutions.",
+        "longDescription": "A 24-hour hackathon to build innovative solutions. Participants will form teams and work on projects that address specific challenges. This event encourages creativity, collaboration, and rapid prototyping. At the end of the hackathon, teams will present their solutions to a panel of judges, with prizes awarded to the most innovative and impactful projects.",
         "tags": [
             "Hackathon"
         ],
         "timestamp": "2024-01-08T12:00:00Z",
         "sharepointLinks": [
-            "http://example.com/hackathon"
+            "https://example.com/hackathon"
         ]
     },
     {
         "title": "Marketing Seminar",
         "briefDescription": "Seminar on digital marketing.",
-        "longDescription": "A seminar to learn about the latest trends in digital marketing.",
+        "longDescription": "A seminar to learn about the latest trends in digital marketing. Industry experts will share insights on topics such as social media marketing, search engine optimization, content marketing, and data analytics. Attendees will gain practical knowledge and strategies to enhance their digital marketing efforts and drive business growth.",
         "tags": [
             "Marketing",
             "Seminar"
         ],
         "timestamp": "2024-02-09T14:00:00Z",
         "sharepointLinks": [
-            "http://example.com/marketing-seminar"
+            "https://example.com/marketing-seminar"
         ]
     },
     {
         "title": "Blockchain Meetup",
         "briefDescription": "Meetup for blockchain enthusiasts.",
-        "longDescription": "A meetup to discuss the latest developments in blockchain technology.",
+        "longDescription": "A meetup to discuss the latest developments in blockchain technology. This event brings together blockchain enthusiasts, developers, and industry professionals to share knowledge and explore new opportunities. Topics will include blockchain applications, smart contracts, and decentralized finance. Attendees will have the chance to network and collaborate on blockchain projects.",
         "tags": [
             "Blockchain",
             "Meetup"
         ],
         "timestamp": "2024-02-10T16:00:00Z",
         "sharepointLinks": [
-            "http://example.com/blockchain-meetup"
+            "https://example.com/blockchain-meetup"
         ]
     }
 ]
