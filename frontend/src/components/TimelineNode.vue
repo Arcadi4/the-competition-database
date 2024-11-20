@@ -1,8 +1,8 @@
 <template>
     <n-flex :wrap="false" class="timeline-node">
         <div class="side-date-display">
-            <p style="line-height: 0">{{ weekday }}</p>
-            <h1 style="line-height: 0">{{ monthday }}</h1>
+            <p style="line-height: 0">{{ props.weekday }}</p>
+            <h1 style="line-height: 0">{{ props.monthday }}</h1>
         </div>
         <n-card hoverable size="small" style="padding: 5px">
             <div style="font-size: medium; font-weight: bold" v-html="title" />
@@ -14,13 +14,12 @@
 <script lang="ts" setup>
 import { defineProps } from "vue";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const props = defineProps({
-    title: String,
-    description: String,
-    weekday: String,
-    monthday: String,
-});
+const props = defineProps<{
+    title: string;
+    description: string;
+    weekday: string;
+    monthday: string;
+}>();
 </script>
 
 <style scoped>
