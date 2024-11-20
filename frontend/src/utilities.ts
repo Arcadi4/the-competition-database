@@ -12,3 +12,8 @@ export const formatMonth = (date: string): string => {
     const dateobj = new Date(date);
     return dateobj.toLocaleString("en-US", { month: "long" });
 };
+
+export const formatYear = (date: string): string => {
+    const dateobj = new Date(date);
+    return dateobj.toLocaleString("en-US", { year: "numeric" });
+};

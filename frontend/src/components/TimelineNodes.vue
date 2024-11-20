@@ -1,17 +1,25 @@
 <template>
     <n-flex
         class="timeline-container"
-        style="position: relative; left: 60px; width: calc(100% - 80px)"
+        style="
+            position: relative;
+            left: 60px;
+            width: calc(100% - 80px);
+            padding: 20px 0;
+        "
         vertical
     >
         <template v-for="(event, index) in props.events" :key="event._id">
-            <h2
+            <div
                 v-if="isNewMonth(index)"
                 class="month-indicator"
-                style="color: #b4b4b4"
+                style="color: #b4b4b4; display: flex; align-items: baseline"
             >
-                {{ formatMonth(event.timestamp) }}
-            </h2>
+                <h2 style="margin-right: 10px">
+                    {{ formatMonth(event.timestamp) }}
+                </h2>
+                {{ formatYear(event.timestamp) }}
+            </div>
             <timeline-node
                 :description="event.briefDescription"
                 :monthday="formatMonthday(event.timestamp)"
@@ -26,9 +34,13 @@
 import TimelineNode from "@/components/TimelineNode.vue";
 import { defineProps } from "vue";
 import { IEvent } from "@/types";
-import { formatMonth, formatMonthday, formatWeekday } from "@/utilities";
+import {
+    formatMonth,
+    formatMonthday,
+    formatWeekday,
+    formatYear,
+} from "@/utilities";
 
-// eslint-disable-next-line
 const props = defineProps<{
     events: IEvent[];
 }>();
