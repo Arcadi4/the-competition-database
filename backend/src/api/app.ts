@@ -70,7 +70,9 @@ app.get("/api/event", async (req, res) => {
             res.status(200).json([]);
             return;
         }
-        const data = await DBHandler.getInstance().queryEvents(query);
+        const data = await DBHandler.getInstance().queryEvents(
+            query.split(" ")
+        );
         res.status(200).json(data);
     }
 });

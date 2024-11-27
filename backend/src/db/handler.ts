@@ -45,14 +45,15 @@ export class DBHandler {
         return Event.findById(id);
     }
 
-    public async queryEvents(query: string): Promise<JSON[]> {
+    public async queryEvents(query: string[]): Promise<JSON[]> {
         console.log(`Event fetching with query: ${query}`);
         return Event.find({
-            $or: [
-                { title: { $regex: query, $options: "i" } },
-                { briefDescription: { $regex: query, $options: "i" } },
-                { longDescription: { $regex: query, $options: "i" } },
-            ],
+            $or: query.map((keyword) => ({
+                $or: [
+                    { title: { $regex: keyword, $options: "i" } },
+                    { briefDescription: { $regex: keyword, $options: "i" } },
+                ],
+            })),
         });
     }
 
