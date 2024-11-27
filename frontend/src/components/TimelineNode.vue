@@ -5,8 +5,26 @@
             <h1 style="line-height: 0">{{ props.monthday }}</h1>
         </div>
         <n-card hoverable size="small" style="padding: 5px">
-            <div style="font-size: medium; font-weight: bold" v-html="title" />
-            <div v-html="description" />
+            <div style="font-size: medium; font-weight: bold">
+                <n-highlight
+                    :highlight-style="{
+                        background: '#18A058',
+                        color: '#fff',
+                    }"
+                    :patterns="highlightPatterns"
+                    :text="title"
+                />
+            </div>
+            <div>
+                <n-highlight
+                    :highlight-style="{
+                        background: '#18A058',
+                        color: '#fff',
+                    }"
+                    :patterns="highlightPatterns"
+                    :text="description"
+                />
+            </div>
         </n-card>
     </n-flex>
 </template>
@@ -19,6 +37,7 @@ const props = defineProps<{
     description: string;
     weekday: string;
     monthday: string;
+    highlightPatterns?: string[];
 }>();
 </script>
 

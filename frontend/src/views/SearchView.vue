@@ -17,7 +17,12 @@
                     @click="search"
                 />
             </n-input-group>
-            <timeline-nodes :events="highlightedResults" />
+
+            <timeline-nodes
+                :events="searchResults"
+                :highlight-patterns="keyword ? keyword.trim().split(' ') : []"
+            />
+
             <n-empty
                 :style="{ display: noResult }"
                 description="No Results"
@@ -35,7 +40,7 @@
 
 <script lang="ts" setup>
 import { FileFailedOne, Search } from "@icon-park/vue-next";
-import { computed, h, ref, watch } from "vue";
+import { h, ref, watch } from "vue";
 import axios from "axios";
 import { apiUrl } from "@/main";
 import { IEvent } from "@/types";
@@ -44,29 +49,6 @@ import TimelineNodes from "@/components/TimelineNodes.vue";
 const searchResults = ref<IEvent[]>([]);
 const keyword = ref("");
 const noResult = ref<"none" | "">("none");
-
-const highlightedResults = computed(() => {
-    const keywordRegex = new RegExp(`(${keyword.value})`, "gi");
-    return searchResults.value.map((event) => {
-        return {
-            ...event,
-            title: event.title.replace(
-                keywordRegex,
-                '<span class="highlight">$1</span>'
-            ),
-            briefDescription: event.briefDescription.replace(
-                keywordRegex,
-                '<span class="highlight">$1</span>'
-            ),
-            longDescription: event.longDescription.replace(
-                keywordRegex,
-                '<span class="highlight">$1</span>'
-            ),
-        };
-    });
-});
-
-// TODO: Keyword highlighting
 
 const search = async () => {
     const response = await axios.get(`${apiUrl}/api/event?q=${keyword.value}`);
@@ -85,9 +67,4 @@ watch(searchResults, (newVal) => {
 });
 </script>
 
-<style>
-.highlight {
-    color: forestgreen;
-    font-weight: bolder;
-}
-</style>
+<style></style>

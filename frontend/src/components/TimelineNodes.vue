@@ -22,6 +22,7 @@
             </div>
             <timeline-node
                 :description="event.briefDescription"
+                :highlight-patterns="highlightPatterns"
                 :monthday="formatMonthday(event.timestamp)"
                 :title="event.title"
                 :weekday="formatWeekday(event.timestamp)"
@@ -44,6 +45,7 @@ import {
 
 const props = defineProps<{
     events: IEvent[];
+    highlightPatterns?: string[];
 }>();
 
 const isNewMonth = (index: number) => {
