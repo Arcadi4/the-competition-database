@@ -23,7 +23,7 @@
                     >
                         <Edit />
                     </n-button>
-                    <timeline-nodes
+                    <event-timeline
                         :events="allEvents"
                         @event-click="handleEventClick"
                     />
@@ -39,7 +39,7 @@
                 height: calc(100vh - 100px);
                 "
                 >
-                    <reader-view
+                    <article-viewer
                         v-if="selectedEvent"
                         :abstract="selectedEvent?.briefDescription"
                         :content="selectedEvent?.longDescription"
@@ -64,8 +64,8 @@ import { onMounted, ref } from "vue";
 import axios from "axios";
 import { IEvent } from "@/types";
 import { apiUrl } from "@/main";
-import TimelineNodes from "@/components/TimelineNodes.vue";
-import ReaderView from "@/views/ReaderView.vue";
+import EventTimeline from "@/components/EventTimeline.vue";
+import ArticleViewer from "@/components/ArticleViewer.vue";
 import router from "@/router";
 import { Edit } from "@icon-park/vue-next";
 

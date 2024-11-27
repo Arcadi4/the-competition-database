@@ -21,7 +21,7 @@
                 </h2>
                 {{ formatYear(event.timestamp) }}
             </div>
-            <timeline-node
+            <event-timeline-node
                 :description="event.briefDescription"
                 :highlight-patterns="highlightPatterns"
                 :monthday="formatMonthday(event.timestamp)"
@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts" setup>
-import TimelineNode from "@/components/TimelineNode.vue";
+import EventTimelineNode from "@/components/EventTimelineNode.vue";
 import { computed, defineEmits, defineProps } from "vue";
 import { IEvent } from "@/types";
 import {
@@ -49,6 +49,8 @@ const props = defineProps<{
     highlightPatterns?: string[];
 }>();
 
+const eventsKey = computed(() => JSON.stringify(props.events));
+
 const isNewMonth = (index: number) => {
     if (index === 0) return true;
     const currentEvent = props.events[index];
@@ -60,12 +62,9 @@ const isNewMonth = (index: number) => {
 };
 
 const emit = defineEmits(["event-click"]);
-
 const emitEventClick = (event: IEvent) => {
     emit("event-click", event);
 };
-
-const eventsKey = computed(() => JSON.stringify(props.events));
 </script>
 
 <style scoped>
