@@ -15,6 +15,14 @@
                         height: calc(100vh - 100px);"
                     embedded
                 >
+                    <n-button
+                        circle
+                        class="contribute-button"
+                        type="primary"
+                        @click="() => router.push('/contribute')"
+                    >
+                        <Edit />
+                    </n-button>
                     <timeline-nodes
                         :events="allEvents"
                         @event-click="handleEventClick"
@@ -57,7 +65,9 @@ import axios from "axios";
 import { IEvent } from "@/types";
 import { apiUrl } from "@/main";
 import TimelineNodes from "@/components/TimelineNodes.vue";
-import ReaderView from "@/views/ReaderView.vue"; // TODO: Use dynamic loading rather than loading all events at once
+import ReaderView from "@/views/ReaderView.vue";
+import router from "@/router";
+import { Edit } from "@icon-park/vue-next";
 
 // TODO: Use dynamic loading rather than loading all events at once
 
@@ -65,7 +75,7 @@ const allEvents = ref<IEvent[]>([]);
 
 onMounted(async () => {
     const response = await axios.get(`${apiUrl}/api/event/all`);
-    allEvents.value = response.data.map((node: IEvent, index: number) => ({
+    allEvents.value = response.data.map((node: IEvent) => ({
         ...node,
         id: node._id,
     }));
@@ -80,4 +90,11 @@ const handleEventClick = (event: IEvent) => {
 // const selectedEvent : IEvent;
 </script>
 
-<style></style>
+<style>
+.contribute-button {
+    position: absolute;
+    top: 40px;
+    right: 30px;
+    z-index: 20;
+}
+</style>
