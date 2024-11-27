@@ -3,7 +3,7 @@
         <n-flex :size="40" align="center" justify="center" vertical>
             <n-input-group style="width: 66%">
                 <n-input
-                    v-model:value="keyword"
+                    v-model:value="keywordString"
                     autofocus
                     passively-activated
                     placeholder="Keywords..."
@@ -20,11 +20,11 @@
 
             <timeline-nodes
                 :events="searchResults"
-                :highlight-patterns="keyword ? keyword.trim().split(' ') : []"
+                :highlight-patterns="keywords"
             />
 
             <n-empty
-                :style="{ display: noResult }"
+                :style="{ display: noResultDisplayStyle }"
                 description="No Results"
                 size="large"
             >
@@ -40,18 +40,24 @@
 
 <script lang="ts" setup>
 import { FileFailedOne, Search } from "@icon-park/vue-next";
-import { h, ref, watch } from "vue";
+import { computed, h, ref, watch } from "vue";
 import axios from "axios";
 import { apiUrl } from "@/main";
 import { IEvent } from "@/types";
 import TimelineNodes from "@/components/TimelineNodes.vue";
 
 const searchResults = ref<IEvent[]>([]);
-const keyword = ref("");
-const noResult = ref<"none" | "">("none");
+const keywordString = ref("");
+const keywords = computed(() => {
+    if (keywordString.value.trim() === "") return [];
+    return keywordString.value.trim().split(" ");
+});
+const noResultDisplayStyle = ref<"none" | "">("none");
 
 const search = async () => {
-    const response = await axios.get(`${apiUrl}/api/event?q=${keyword.value}`);
+    const response = await axios.get(
+        `${apiUrl}/api/event?q=${keywordString.value}`
+    );
     searchResults.value = response.data.map((event: IEvent, index: number) => ({
         ...event,
         id: index + 1,
@@ -59,10 +65,10 @@ const search = async () => {
 };
 
 watch(searchResults, (newVal) => {
-    if (keyword.value !== "" && newVal.length === 0) {
-        noResult.value = "";
+    if (keywords.value.length !== 0 && newVal.length === 0) {
+        noResultDisplayStyle.value = "";
     } else {
-        noResult.value = "none";
+        noResultDisplayStyle.value = "none";
     }
 });
 </script>
