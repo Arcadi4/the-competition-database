@@ -1,5 +1,5 @@
 <template>
-    <div style="margin: 0 auto; max-width: 768px">
+    <div style="margin: 0 auto; padding: 20px; max-width: 768px">
         <h1>This is an about page</h1>
         <p>
             Ipsum cillum veniam est ullamco excepteur mollit cupidatat nulla

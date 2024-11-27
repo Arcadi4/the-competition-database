@@ -1,7 +1,7 @@
 <template>
-    <div style="max-width: 768px; margin: 40px auto">
+    <div style="max-width: 768px; margin: 60px auto">
         <n-flex :size="40" align="center" justify="center" vertical>
-            <n-input-group style="width: 50%">
+            <n-input-group style="width: 66%">
                 <n-input
                     v-model:value="keyword"
                     autofocus
