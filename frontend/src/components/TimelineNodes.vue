@@ -1,5 +1,6 @@
 <template>
     <n-flex
+        :key="eventsKey"
         class="timeline-container"
         style="
             position: relative;
@@ -34,7 +35,7 @@
 
 <script lang="ts" setup>
 import TimelineNode from "@/components/TimelineNode.vue";
-import { defineEmits, defineProps } from "vue";
+import { computed, defineEmits, defineProps } from "vue";
 import { IEvent } from "@/types";
 import {
     formatMonth,
@@ -63,6 +64,8 @@ const emit = defineEmits(["event-click"]);
 const emitEventClick = (event: IEvent) => {
     emit("event-click", event);
 };
+
+const eventsKey = computed(() => JSON.stringify(props.events));
 </script>
 
 <style scoped>
