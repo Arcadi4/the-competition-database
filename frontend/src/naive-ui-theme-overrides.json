@@ -1,0 +1,12 @@
+{
+    "common": {
+        "borderRadius": "5px",
+        "borderRadiusSmall": "3px",
+        "baseColor": "#F1F1F1FF",
+        "primaryColor": "#4444E2FF",
+        "primaryColorHover": "#7171E2FF",
+        "primaryColorPressed": "#3636B2FF",
+        "primaryColorSuppl": "#4D4DFFFF",
+        "infoColor": "#2080f0"
+    }
+}

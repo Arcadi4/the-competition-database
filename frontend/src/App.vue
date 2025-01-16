@@ -1,5 +1,8 @@
 <template>
-    <n-config-provider>
+    <n-config-provider
+        :theme="useDarkTheme ? darkTheme : null"
+        :theme-overrides="themeOverrides"
+    >
         <n-message-provider>
             <n-layout has-sider position="absolute" style="max-height: 100%">
                 <n-layout-sider
@@ -21,7 +24,12 @@
                     />
                     <n-button
                         circle
-                        class="collapse-button"
+                        style="
+                            position: fixed;
+                            bottom: 20px;
+                            left: 32px;
+                            transform: translateX(-50%);
+                        "
                         @click="collapseSideBar"
                     >
                         <left v-if="!sideBarCollapsed" />
@@ -62,9 +70,11 @@
 
 <script lang="ts" setup>
 import { Left, Right } from "@icon-park/vue-next";
-import { onMounted, onUnmounted, ref, watch } from "vue";
+import { computed, onMounted, onUnmounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { menuOptions } from "./views/menuOptions";
+import themeOverrides from "@/naive-ui-theme-overrides.json";
+import { darkTheme, useOsTheme } from "naive-ui";
 
 const route = useRoute();
 const activeKey = ref("");
@@ -100,6 +110,12 @@ onMounted(() => {
 onUnmounted(() => {
     clearInterval(intervalId);
 });
+
+const osThemeRef = useOsTheme();
+
+const useDarkTheme = computed(() => {
+    return osThemeRef.value === "dark";
+});
 </script>
 
 <style lang="scss">
@@ -109,13 +125,9 @@ onUnmounted(() => {
     font-family: "Space Grotesk", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #1f1f1f;
 }
 
-.collapse-button {
-    position: fixed;
-    bottom: 20px;
-    left: 32px;
-    transform: translateX(-50%);
+.hidden {
+    display: none;
 }
 </style>
