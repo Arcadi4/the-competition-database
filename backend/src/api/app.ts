@@ -8,29 +8,9 @@ export const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.post("/api/admin/login", async (req, res) => {
-    const { adminKey } = req.body;
-
-    // Temporary disabling the admin login
-
-    return res.status(403);
-
-    // if (!process.env.ADMIN_KEY || !process.env.JWT_SECRET) {
-    //     return res
-    //         .status(500)
-    //         .json({ error: "Error configuration on the server side." });
-    // }
-    //
-    // const isMatch = bcrypt.compare(adminKey, process.env.ADMIN_KEY);
-    // if (!isMatch) {
-    //     return res.status(403).json({ error: "Wrong admin key." });
-    // }
-    //
-    // const token = jwt.sign({ role: "admin" }, process.env.JWT_SECRET, {
-    //     expiresIn: "72h",
-    // });
-    //
-    // res.json({ token });
+app.post("/api/login", (req, res) => {
+    res.send("Login API is not implemented yet.");
+    res.status(501);
 });
 
 app.get("/", (req, res) => {
