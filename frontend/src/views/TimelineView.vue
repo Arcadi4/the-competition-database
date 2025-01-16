@@ -4,17 +4,11 @@
         :max="0.75"
         :min="0.34"
         direction="horizontal"
-        style="height: calc(100vh - 100px)"
+        style="height: 100vh"
     >
         <template #1>
             <n-layout>
-                <n-layout-content
-                    :native-scrollbar="false"
-                    content-style="
-                        max-width: 768px;
-                        height: calc(100vh - 100px);"
-                    embedded
-                >
+                <n-layout-content embedded>
                     <n-button
                         circle
                         class="contribute-button"
@@ -34,10 +28,11 @@
             <n-layout>
                 <n-layout-content
                     content-style="
-                max-width: 768px;
-                padding: 20px;
-                height: calc(100vh - 100px);
-                "
+                        margin: 0 auto;
+                        max-width: 768px;
+                        padding: 20px;
+                        height: 100vh;
+                    "
                 >
                     <article-viewer
                         v-if="selectedEvent"
@@ -49,9 +44,8 @@
                     />
                     <n-empty
                         v-if="!selectedEvent"
-                        description="Click on events
-                    to show detail"
-                        style="margin: 0 auto; transform: translateY(50%)"
+                        description="Click on events to show detail"
+                        style="margin-top: 45vh"
                     />
                 </n-layout-content>
             </n-layout>
@@ -67,7 +61,7 @@ import { apiUrl } from "@/main";
 import EventTimeline from "@/components/TimelineEvent.vue";
 import ArticleViewer from "@/components/ViewerGeneral.vue";
 import router from "@/router";
-import { Edit } from "@icon-park/vue-next";
+import { Edit } from "@icon-park/vue-next"; // TODO: Use dynamic loading rather than loading all events at once
 
 // TODO: Use dynamic loading rather than loading all events at once
 
@@ -86,8 +80,6 @@ const selectedEvent = ref<IEvent | null>(null);
 const handleEventClick = (event: IEvent) => {
     selectedEvent.value = event;
 };
-
-// const selectedEvent : IEvent;
 </script>
 
 <style>

@@ -4,7 +4,7 @@
         :max="0.75"
         :min="0.34"
         direction="horizontal"
-        style="height: calc(100vh - 100px)"
+        style="height: 100vh"
     >
         <template #1>
             <div style="max-width: 768px; margin: 60px auto">
@@ -26,6 +26,7 @@
                         />
                     </n-input-group>
                     <event-timeline
+                        v-if="searchResults.length !== 0"
                         :events="searchResults"
                         :highlight-patterns="keywords"
                     />

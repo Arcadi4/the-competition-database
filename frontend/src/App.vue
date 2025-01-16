@@ -57,24 +57,12 @@
                     :native-scrollbar="false"
                     content-class="router-view"
                 >
-                    <n-layout-header
-                        ref="headerRef"
-                        bordered
-                        position="absolute"
-                        style="z-index: 10; width: 100%; top: 0; height: 100px"
-                    >
-                        <div style="padding: 20px">
-                            <h2 style="line-height: 0">{{ date }}</h2>
-                            {{ time }}
-                        </div>
-                    </n-layout-header>
                     <n-layout-content
                         :native-scrollbar="false"
                         bordered
                         content-style="overflow-y: auto"
                         embedded
                         position="absolute"
-                        style="top: 100px; right: 0"
                     >
                         <router-view />
                     </n-layout-content>

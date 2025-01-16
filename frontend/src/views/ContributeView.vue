@@ -1,6 +1,6 @@
 <template>
     <div style="max-width: 768px; margin: 40px auto">
-        <n-flex :size="40" align="center" justify="center" vertical>
+        <n-flex :size="40" align="center" justify="center">
             <n-card style="width: 500px">
                 <h1>Contribute a New Event</h1>
                 <n-form ref="formRef" :model="formValue" :rules="rules">

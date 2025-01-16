@@ -1,41 +1,51 @@
 <template>
-    <n-flex
-        :key="eventsKey"
-        class="timeline-container"
-        style="
-            position: relative;
-            left: 60px;
-            width: calc(100% - 80px);
-            padding: 20px 0;
-        "
-        vertical
-    >
-        <template v-for="(event, index) in props.events" :key="event._id">
-            <div
-                v-if="isNewMonth(index)"
-                class="month-indicator"
-                style="color: #b4b4b4; display: flex; align-items: baseline"
-            >
-                <h2 style="margin-right: 10px">
-                    {{ formatMonth(event.timestamp) }}
-                </h2>
-                {{ formatYear(event.timestamp) }}
-            </div>
-            <event-timeline-node
-                :description="event.briefDescription"
-                :highlight-patterns="highlightPatterns"
-                :monthday="formatMonthday(event.timestamp)"
-                :title="event.title"
-                :weekday="formatWeekday(event.timestamp)"
-                @click="() => emitEventClick(event)"
-            />
-        </template>
-    </n-flex>
+    <n-layout>
+        <n-layout-content
+            :native-scrollbar="false"
+            class="timeline-container"
+            content-style="
+                position: relative;
+                padding: 0 20px;
+                padding-left: 80px;
+                height: 100vh;
+            "
+            embedded
+        >
+            <div style="height: 40px" />
+            <template v-for="(event, index) in props.events" :key="event._id">
+                <div style="margin: 10px auto; width: inherit">
+                    <div
+                        v-if="isNewMonth(index)"
+                        class="month-indicator"
+                        style="
+                            color: #b4b4b4;
+                            display: flex;
+                            align-items: baseline;
+                        "
+                    >
+                        <h2 style="margin-right: 10px">
+                            {{ formatMonth(event.timestamp) }}
+                        </h2>
+                        {{ formatYear(event.timestamp) }}
+                    </div>
+                    <event-timeline-node
+                        :description="event.briefDescription"
+                        :highlight-patterns="highlightPatterns"
+                        :monthday="formatMonthday(event.timestamp)"
+                        :title="event.title"
+                        :weekday="formatWeekday(event.timestamp)"
+                        @click="() => emitEventClick(event)"
+                    />
+                </div>
+            </template>
+            <div style="height: 60px" />
+        </n-layout-content>
+    </n-layout>
 </template>
 
 <script lang="ts" setup>
 import EventTimelineNode from "@/components/TimelineEventNode.vue";
-import { computed, defineEmits, defineProps } from "vue";
+import { defineEmits, defineProps } from "vue";
 import { IEvent } from "@/types";
 import {
     formatMonth,
@@ -48,8 +58,6 @@ const props = defineProps<{
     events: IEvent[];
     highlightPatterns?: string[];
 }>();
-
-const eventsKey = computed(() => JSON.stringify(props.events));
 
 const isNewMonth = (index: number) => {
     if (index === 0) return true;
@@ -72,11 +80,11 @@ const emitEventClick = (event: IEvent) => {
     content: "";
     position: absolute;
     top: 0;
-    left: -35px;
+    left: 45px;
     width: 2px;
     border-radius: 1px;
     height: 100%;
-    background-color: #eeeeee;
+    background-color: rgba(178, 178, 178, 0.5);
 }
 
 .month-indicator {
