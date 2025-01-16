@@ -3,13 +3,13 @@
         <n-layout-content
             :native-scrollbar="false"
             class="timeline-container"
+            content-class="timeline-container"
             content-style="
                 position: relative;
-                padding: 0 20px;
-                padding-left: 80px;
-                height: 100vh;
+                padding: 0 20px 0px 80px;
             "
             embedded
+            style="height: 100vh"
         >
             <div style="height: 40px" />
             <template v-for="(event, index) in props.events" :key="event._id">
@@ -83,7 +83,7 @@ const emitEventClick = (event: IEvent) => {
     left: 45px;
     width: 2px;
     border-radius: 1px;
-    height: 100%;
+    height: 100vh;
     background-color: rgba(178, 178, 178, 0.5);
 }
 
