@@ -59,7 +59,8 @@ import { computed, h, ref, watch } from "vue";
 import axios from "axios";
 import { apiUrl } from "@/main";
 import { IEvent } from "@/types";
-import EventTimeline from "@/components/EventTimeline.vue";
+import EventTimeline from "@/components/TimelineEvent.vue";
+import ArticleViewer from "@/components/ViewerGeneral.vue";
 
 const searchResults = ref<IEvent[]>([]);
 const keywordString = ref("");

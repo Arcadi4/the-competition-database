@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts" setup>
-import EventTimelineNode from "@/components/EventTimelineNode.vue";
+import EventTimelineNode from "@/components/TimelineEventNode.vue";
 import { computed, defineEmits, defineProps } from "vue";
 import { IEvent } from "@/types";
 import {

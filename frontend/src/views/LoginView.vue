@@ -6,6 +6,8 @@
     </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import LoginPopup from "@/components/PopupLogin.vue";
+</script>
 
 <style scoped></style>
