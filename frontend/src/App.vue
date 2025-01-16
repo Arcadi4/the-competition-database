@@ -1,6 +1,6 @@
 <template>
     <n-config-provider
-        :theme="useDarkTheme ? darkTheme : null"
+        :theme="useDarkTheme ? darkTheme : undefined"
         :theme-overrides="themeOverrides"
     >
         <n-message-provider>
@@ -22,6 +22,22 @@
                         :options="menuOptions"
                         :value="activeKey"
                     />
+                    <n-button
+                        circle
+                        style="
+                            position: fixed;
+                            bottom: 70px;
+                            left: 32px;
+                            transform: translateX(-50%);
+                        "
+                        @click="
+                            () => {
+                                useDarkTheme = !useDarkTheme;
+                            }
+                        "
+                    >
+                        <dark-mode />
+                    </n-button>
                     <n-button
                         circle
                         style="
@@ -69,11 +85,11 @@
 </template>
 
 <script lang="ts" setup>
-import { Left, Right } from "@icon-park/vue-next";
-import { computed, onMounted, onUnmounted, ref, watch } from "vue";
+import { DarkMode, Left, Right } from "@icon-park/vue-next";
+import { onMounted, onUnmounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { menuOptions } from "./views/menuOptions";
-import themeOverrides from "@/naive-ui-theme-overrides.json";
+import themeOverrides from "@/theme/override.json";
 import { darkTheme, useOsTheme } from "naive-ui";
 
 const route = useRoute();
@@ -111,10 +127,14 @@ onUnmounted(() => {
     clearInterval(intervalId);
 });
 
-const osThemeRef = useOsTheme();
-
-const useDarkTheme = computed(() => {
-    return osThemeRef.value === "dark";
+// Theme policy:
+// - Use the OS theme by default
+// - Allow the user to toggle between light and dark themes
+// - Change when the OS theme changes, this is prioritized over the user's choice
+const osTheme = useOsTheme();
+const useDarkTheme = ref<boolean>(osTheme.value === "dark");
+watch(osTheme, (newTheme) => {
+    useDarkTheme.value = newTheme === "dark";
 });
 </script>
 
