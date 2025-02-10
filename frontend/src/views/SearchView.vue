@@ -7,7 +7,7 @@
         style="height: 100vh"
     >
         <template #1>
-            <div style="max-width: 768px; margin: 60px auto">
+            <div style="max-width: 768px; margin: 0 auto; padding: 20px">
                 <n-flex :size="40" align="center" justify="center" vertical>
                     <n-input-group style="width: 66%">
                         <n-input
@@ -29,6 +29,7 @@
                         v-if="searchResults.length !== 0"
                         :events="searchResults"
                         :highlight-patterns="keywords"
+                        style="width: 100%"
                     />
                     <n-empty
                         :class="

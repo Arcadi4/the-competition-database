@@ -17,12 +17,13 @@ export interface IEventData {
     sharepointLinks: string[];
 }
 
+// TODO: FILL THIS IN
 export enum EventTags {
-    "Tag 1",
-    "Tag 2",
-    "Tag 3",
-    "Tag 4",
-    "Tag 5",
+    "DEBUG 1",
+    "DEBUG 2",
+    "DEBUG 3",
+    "DEBUG 4",
+    "DEBUG 5",
 }
 
 export interface IEventSubmission {

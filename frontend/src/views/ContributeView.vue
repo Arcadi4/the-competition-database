@@ -3,7 +3,11 @@
         <n-flex :size="40" align="center" justify="center">
             <n-card style="width: 500px">
                 <h1>Contribute a New Event</h1>
-                <n-form ref="formRef" :model="formValue" :rules="rules">
+                <n-form
+                    ref="formRef"
+                    :model="formValue"
+                    :rules="contribution.formRules"
+                >
                     <n-form-item label="Event Title" path="title">
                         <n-input
                             v-model:value="formValue.title"
@@ -138,17 +142,17 @@ const verifyAndSubmitEvent = (e: MouseEvent) => {
     formRef.value
         ?.validate((errors) => {
             if (!errors) {
-                console.log("Event submitted");
+                console.log("Submit successful!");
                 console.log(formValue.value);
                 axios
                     .post(`${apiUrl}/api/event/add`, formValue.value)
                     .catch((err) => {
-                        console.error(`Event submission failed: ${err}`);
+                        console.error(`Failed to submit event: ${err}`);
                     });
             }
         })
         .catch((err) => {
-            console.error(`Event submission failed due to: ${err}`);
+            console.error(`Failed to submit event: ${err}`);
         });
 };
 </script>

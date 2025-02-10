@@ -26,5 +26,7 @@ module.exports = {
                 tabWidth: 4,
             },
         ],
+        "@typescript-eslint/prefer-namespace-keyword": "off",
+        "@typescript-eslint/no-namespace": "off",
     },
 };
