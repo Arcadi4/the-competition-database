@@ -1,8 +1,5 @@
 <template>
-    <n-config-provider
-        :theme="useDarkTheme ? darkTheme : undefined"
-        :theme-overrides="themeOverrides"
-    >
+    <n-config-provider :theme-overrides="themeOverrides">
         <n-message-provider>
             <n-layout has-sider position="absolute" style="max-height: 100%">
                 <n-layout-sider
@@ -29,11 +26,6 @@
                             bottom: 70px;
                             left: 32px;
                             transform: translateX(-50%);
-                        "
-                        @click="
-                            () => {
-                                useDarkTheme = !useDarkTheme;
-                            }
                         "
                     >
                         <dark-mode />
@@ -78,7 +70,6 @@ import { onMounted, onUnmounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { menuOptions } from "./views/menuOptions";
 import themeOverrides from "@/theme/override.json";
-import { darkTheme, useOsTheme } from "naive-ui";
 
 const route = useRoute();
 const activeKey = ref("");
@@ -113,16 +104,6 @@ onMounted(() => {
 
 onUnmounted(() => {
     clearInterval(intervalId);
-});
-
-// Theme policy:
-// - Use the OS theme by default
-// - Allow the user to toggle between light and dark themes
-// - Change when the OS theme changes, this is prioritized over the user's choice
-const osTheme = useOsTheme();
-const useDarkTheme = ref<boolean>(osTheme.value === "dark");
-watch(osTheme, (newTheme) => {
-    useDarkTheme.value = newTheme === "dark";
 });
 </script>
 
