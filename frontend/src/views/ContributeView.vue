@@ -52,7 +52,23 @@
                         <n-button
                             attr-type="button"
                             type="primary"
-                            @click="verifyAndSubmitEvent"
+                            @click="
+                                () => {
+                                    if (formRef === null) {
+                                        return;
+                                    }
+                                    let err =
+                                        contribution.verifySubmission(formRef);
+                                    if (err === null) {
+                                        contribution.submitEvent(
+                                            formRef,
+                                            formValue
+                                        );
+                                    } else {
+                                        contribution.printFormErrors(err);
+                                    }
+                                }
+                            "
                         >
                             Submit
                         </n-button>
@@ -66,7 +82,8 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { EventTags, IEventSubmission } from "@/types";
-import type { FormInst, FormItemRule } from "naive-ui";
+import type { FormInst } from "naive-ui";
+import { contribution } from "@/views/contribution";
 import axios from "axios";
 import { apiUrl } from "@/main";
 
@@ -78,55 +95,6 @@ const formValue = ref<IEventSubmission>({
     tags: [],
     timestamp: new Date().setHours(0, 0, 0, 0),
 });
-
-const rules = {
-    title: [
-        {
-            required: true,
-            message: "A title is required",
-            trigger: ["input", "blur"],
-        },
-    ],
-    briefDescription: [
-        {
-            required: true,
-            message: "A summary is required",
-            trigger: ["input", "blur"],
-        },
-    ],
-    longDescription: [
-        {
-            required: true,
-            message: "A description is required",
-            trigger: ["input", "blur"],
-        },
-        {
-            trigger: ["blur"],
-            level: "warning",
-            validator: (_rule: FormItemRule, value: string) => {
-                if (value.length < 100) {
-                    return new Error("Consider a more detailed description");
-                }
-                return true;
-            },
-        },
-    ],
-    tags: [],
-    timestamp: [
-        {
-            trigger: ["input", "blur"],
-            level: "warning",
-            validator: (_rule: FormItemRule, value: number) => {
-                if (value < Date.now().valueOf() - 86400000) {
-                    return new Error(
-                        "This is an past event, but you are still welcome to contribute"
-                    );
-                }
-                return true;
-            },
-        },
-    ],
-};
 
 const tags = Object.keys(EventTags)
     .filter((index: string) => !isNaN(Number(index)))
