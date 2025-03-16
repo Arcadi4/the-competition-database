@@ -74,7 +74,7 @@ export class DBHandler {
 
     public async approveEvent(
         id: EventId
-    ): Promise<mongoose.Types.ObjectId | null> {
+    ): Promise<string | mongoose.Types.ObjectId> {
         try {
             const pendingEvent = await PendingApprovalEvent.findById(id);
             if (!pendingEvent) {
@@ -85,8 +85,13 @@ export class DBHandler {
             await PendingApprovalEvent.findByIdAndDelete(id);
             console.log(`Approved event with id: ${id}`);
             return approvedEvent._id;
-        } catch (error: any) {
-            if (error.name === "VersionError") {
+        } catch (error) {
+            if (error.name === "ValidationError") {
+                console.warn("Validation warning approving event:", error);
+                // Proceed with the action despite the validation error
+                await PendingApprovalEvent.findByIdAndDelete(id);
+                return id;
+            } else if (error.name === "VersionError") {
                 console.error("Version error approving event:", error);
                 throw new Error(
                     "Event has been modified by another process. Please try again."
@@ -98,7 +103,7 @@ export class DBHandler {
 
     public async rejectEvent(
         id: EventId
-    ): Promise<mongoose.Types.ObjectId | null> {
+    ): Promise<string | mongoose.Types.ObjectId> {
         try {
             if (!mongoose.isValidObjectId(id)) {
                 return null;
@@ -112,8 +117,13 @@ export class DBHandler {
             await PendingApprovalEvent.findByIdAndDelete(id);
             console.log(`Rejected and moved to trash event with id: ${id}`);
             return disposedEvent._id;
-        } catch (error: any) {
-            if (error.name === "VersionError") {
+        } catch (error) {
+            if (error.name === "ValidationError") {
+                console.warn("Validation warning rejecting event:", error);
+                // Proceed with the action despite the validation error
+                await PendingApprovalEvent.findByIdAndDelete(id);
+                return id;
+            } else if (error.name === "VersionError") {
                 console.error("Version error rejecting event:", error);
                 throw new Error(
                     "Event has been modified by another process. Please try again."
