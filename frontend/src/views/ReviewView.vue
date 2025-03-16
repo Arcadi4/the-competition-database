@@ -35,6 +35,7 @@
                 <n-empty
                     description="All events reviewed, congrats!"
                     size="large"
+                    style="margin-top: 70px; margin-bottom: 50px"
                 >
                     <template #icon>
                         <n-icon>

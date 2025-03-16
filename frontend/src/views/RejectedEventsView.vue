@@ -27,7 +27,11 @@
                 </n-list-item>
             </n-list>
             <div v-if="rejectedEvents.length === 0">
-                <n-empty description="No rejected events." size="large">
+                <n-empty
+                    description="No rejected events."
+                    size="large"
+                    style="margin-top: 70px; margin-bottom: 50px"
+                >
                     <template #icon>
                         <n-icon>
                             <check />
