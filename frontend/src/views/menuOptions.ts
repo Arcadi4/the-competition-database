@@ -2,75 +2,25 @@ import { DocAdd, HomeTwo, Info, Search } from "@icon-park/vue-next";
 import { MenuOption } from "naive-ui";
 import { h } from "vue";
 import { RouterLink } from "vue-router";
+import { Inspection } from "@icon-park/vue-next/es";
 
 export const menuOptions: MenuOption[] = [
-    {
-        label: () =>
-            h(
-                RouterLink,
-                { to: { name: "timeline" } },
-                { default: () => "Timeline" }
-            ),
-        key: "timeline",
-        icon: () =>
-            h(HomeTwo, {
-                style: IconStyle,
-            }),
-    },
-    {
-        label: () =>
-            h(
-                RouterLink,
-                { to: { name: "search" } },
-                { default: () => "Search" }
-            ),
-
-        key: "search",
-        icon: () =>
-            h(Search, {
-                style: IconStyle,
-            }),
-    },
-    {
-        label: () =>
-            h(
-                RouterLink,
-                { to: { name: "about" } },
-                { default: () => "About" }
-            ),
-        key: "about",
-        icon: () =>
-            h(Info, {
-                style: IconStyle,
-            }),
-    },
-    {
-        label: () =>
-            h(
-                RouterLink,
-                { to: { name: "contribute" } },
-                { default: () => "Contribute" }
-            ),
-        key: "contribute",
-        icon: () =>
-            h(DocAdd, {
-                style: IconStyle,
-            }),
-    },
-    // {
-    //     label: () =>
-    //         h(
-    //             RouterLink,
-    //             { to: { name: "login" } },
-    //             { default: () => "Login" }
-    //         ),
-    //     key: "login",
-    //     icon: () =>
-    //         h(People, {
-    //             style: IconStyle,
-    //         }),
-    // },
+    menuItem("timeline", "Timeline", () => h(HomeTwo, { style: IconStyle })),
+    menuItem("search", "Search", () => h(Search, { style: IconStyle })),
+    menuItem("about", "About", () => h(Info, { style: IconStyle })),
+    menuItem("contribute", "Contribute", () => h(DocAdd, { style: IconStyle })),
+    // menuItem("login", "Login", () => h(People, { style: IconStyle })),
+    menuItem("review", "Review", () => h(Inspection, { style: IconStyle })),
 ];
+
+function menuItem(uri: string, label: string, icon: any): MenuOption {
+    return {
+        label: () =>
+            h(RouterLink, { to: { name: uri } }, { default: () => label }),
+        key: uri,
+        icon: icon,
+    };
+}
 
 const IconStyle = {
     height: "24px",

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { Event, PendingApprovalEvent } from "./schemas";
+import { DisposedEvent, Event, PendingApprovalEvent } from "./schemas";
 import { EventId, IEventData, IFrontendEvent } from "../types";
 
 export class DBHandler {
@@ -45,6 +45,11 @@ export class DBHandler {
         return Event.findById(id);
     }
 
+    public async getPendingApprovalEvents(): Promise<JSON[]> {
+        console.log("Pending approval events fetching");
+        return PendingApprovalEvent.find();
+    }
+
     public async queryEvents(query: string[]): Promise<JSON[]> {
         console.log(`Event fetching with query: ${query}`);
         return Event.find({
@@ -70,30 +75,52 @@ export class DBHandler {
     public async approveEvent(
         id: EventId
     ): Promise<mongoose.Types.ObjectId | null> {
-        const pendingEvent = await PendingApprovalEvent.findById(id);
-        if (!pendingEvent) {
-            return null;
+        try {
+            const pendingEvent = await PendingApprovalEvent.findById(id);
+            if (!pendingEvent) {
+                return null;
+            }
+            const approvedEvent = new Event(pendingEvent.toObject());
+            await approvedEvent.save();
+            await PendingApprovalEvent.findByIdAndDelete(id);
+            console.log(`Approved event with id: ${id}`);
+            return approvedEvent._id;
+        } catch (error: any) {
+            if (error.name === "VersionError") {
+                console.error("Version error approving event:", error);
+                throw new Error(
+                    "Event has been modified by another process. Please try again."
+                );
+            }
+            throw error;
         }
-        const approvedEvent = new Event(pendingEvent);
-        await approvedEvent.save();
-        await PendingApprovalEvent.findByIdAndDelete(id);
-        console.log(`Approved event with id: ${id}`);
-        return approvedEvent._id;
     }
 
     public async rejectEvent(
         id: EventId
     ): Promise<mongoose.Types.ObjectId | null> {
-        if (!mongoose.isValidObjectId(id)) {
-            return null;
+        try {
+            if (!mongoose.isValidObjectId(id)) {
+                return null;
+            }
+            const event = await PendingApprovalEvent.findById(id);
+            if (!event) {
+                return null;
+            }
+            const disposedEvent = new DisposedEvent(event.toObject());
+            await disposedEvent.save();
+            await PendingApprovalEvent.findByIdAndDelete(id);
+            console.log(`Rejected and moved to trash event with id: ${id}`);
+            return disposedEvent._id;
+        } catch (error: any) {
+            if (error.name === "VersionError") {
+                console.error("Version error rejecting event:", error);
+                throw new Error(
+                    "Event has been modified by another process. Please try again."
+                );
+            }
+            throw error;
         }
-        const event = await PendingApprovalEvent.findById(id);
-        if (!event) {
-            return null;
-        }
-        await PendingApprovalEvent.findByIdAndDelete(id);
-        console.log(`Rejected event with id: ${id}`);
-        return event._id;
     }
 
     private frontendEventTransform(eventData: IFrontendEvent): IEventData {

@@ -1,6 +1,5 @@
 import express from "express";
 import { DBHandler, PendingApprovalEvent } from "../db";
-import jwt from "jsonwebtoken";
 import cors from "cors";
 
 export const app = express();
@@ -74,37 +73,45 @@ app.post("/api/event/add", (req, res) => {
     res.status(201).json({ id: eventID });
 });
 
-app.post(
-    "/api/event/approve",
-    (req, res, next) => {
-        if (!process.env.JWT_SECRET) {
-            return res
-                .status(500)
-                .json({ error: "Error configuration on the server side." });
+app.get("/api/event/pending", async (req, res) => {
+    const data = await DBHandler.getInstance().getPendingApprovalEvents();
+    res.status(200).json(data);
+});
+
+app.post("/api/event/approve", async (req, res) => {
+    try {
+        const { eventId } = req.body;
+        if (!eventId) {
+            return res.status(400).json({ error: "Event ID is required." });
         }
 
-        const authHeader = req.headers["authorization"];
-        const token = authHeader && authHeader.split(" ")[1];
-        if (token == null) return res.sendStatus(401);
-
-        jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-            if (err) return res.sendStatus(403);
-            if (
-                !decoded ||
-                typeof decoded !== "object" ||
-                decoded.role !== "admin"
-            )
-                return res.sendStatus(403);
-            next();
-        });
-    },
-    async (req, res) => {
-        const { eventId } = req.body;
         const result = await DBHandler.getInstance().approveEvent(eventId);
         if (result) {
             res.status(200).json({ message: `Event approved, id: ${result}` });
         } else {
             res.status(400).json({ error: "Failed to approve event." });
         }
+    } catch (error) {
+        console.error("Error approving event:", error);
+        res.status(500).json({ error: "Internal server error." });
     }
-);
+});
+
+app.post("/api/event/reject", async (req, res) => {
+    try {
+        const { eventId } = req.body;
+        if (!eventId) {
+            return res.status(400).json({ error: "Event ID is required." });
+        }
+
+        const result = await DBHandler.getInstance().rejectEvent(eventId);
+        if (result) {
+            res.status(200).json({ message: `Event rejected, id: ${result}` });
+        } else {
+            res.status(400).json({ error: "Failed to reject event." });
+        }
+    } catch (error) {
+        console.error("Error rejecting event:", error);
+        res.status(500).json({ error: "Internal server error." });
+    }
+});

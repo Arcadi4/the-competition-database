@@ -18,3 +18,4 @@ export const PendingApprovalEvent = mongoose.model(
     "PendingApprovalEvent",
     eventSchema
 );
+export const DisposedEvent = mongoose.model("DisposedEvent", eventSchema);

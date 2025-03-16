@@ -4,38 +4,28 @@ import TimelineView from "@/views/TimelineView.vue";
 import SearchView from "@/views/SearchView.vue";
 import ContributeView from "@/views/ContributeView.vue";
 import LoginView from "@/views/LoginView.vue";
+import ReviewView from "@/views/ReviewView.vue";
 
 const routes: Array<RouteRecordRaw> = [
-    {
-        path: "/",
-        name: "timeline",
-        component: TimelineView,
-    },
-    {
-        path: "/about",
-        name: "about",
-        component: AboutView,
-    },
-    {
-        path: "/search",
-        name: "search",
-        component: SearchView,
-    },
-    {
-        path: "/contribute",
-        name: "contribute",
-        component: ContributeView,
-    },
-    {
-        path: "/login",
-        name: "login",
-        component: LoginView,
-    },
+    routeRecordRaw("timeline", TimelineView),
+    routeRecordRaw("about", AboutView),
+    routeRecordRaw("search", SearchView),
+    routeRecordRaw("contribute", ContributeView),
+    routeRecordRaw("login", LoginView),
+    routeRecordRaw("review", ReviewView),
 ];
 
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes,
 });
+
+function routeRecordRaw(name: string, component: any): RouteRecordRaw {
+    return {
+        path: `/${name}`,
+        name: name,
+        component: component,
+    };
+}
 
 export default router;

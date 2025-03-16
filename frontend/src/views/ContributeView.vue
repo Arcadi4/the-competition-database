@@ -52,23 +52,7 @@
                         <n-button
                             attr-type="button"
                             type="primary"
-                            @click="
-                                () => {
-                                    if (formRef === null) {
-                                        return;
-                                    }
-                                    let err =
-                                        contribution.verifySubmission(formRef);
-                                    if (err === null) {
-                                        contribution.submitEvent(
-                                            formRef,
-                                            formValue
-                                        );
-                                    } else {
-                                        contribution.printFormErrors(err);
-                                    }
-                                }
-                            "
+                            @click="handleSubmitClick"
                         >
                             Submit
                         </n-button>
@@ -84,8 +68,7 @@ import { ref } from "vue";
 import { EventTags, IEventSubmission } from "@/types";
 import type { FormInst } from "naive-ui";
 import { contribution } from "@/views/contribution";
-import axios from "axios";
-import { apiUrl } from "@/main";
+import { message } from "../../message";
 
 const formRef = ref<FormInst | null>(null);
 const formValue = ref<IEventSubmission>({
@@ -103,25 +86,15 @@ const tags = Object.keys(EventTags)
         value: index,
     }));
 
-const verifyAndSubmitEvent = (e: MouseEvent) => {
-    e.preventDefault();
-    console.log(formValue.value);
-    // There is a crash caused by the following line
-    formRef.value
-        ?.validate((errors) => {
-            if (!errors) {
-                console.log("Submit successful!");
-                console.log(formValue.value);
-                axios
-                    .post(`${apiUrl}/api/event/add`, formValue.value)
-                    .catch((err) => {
-                        console.error(`Failed to submit event: ${err}`);
-                    });
-            }
-        })
-        .catch((err) => {
-            console.error(`Failed to submit event: ${err}`);
-        });
+const handleSubmitClick = async () => {
+    if (formRef.value === null) {
+        return;
+    }
+    if (await contribution.verifySubmission(formRef.value)) {
+        await contribution.submitEvent(formRef.value, formValue.value);
+    } else {
+        message.warning("Please check the field requirements.");
+    }
 };
 </script>
 

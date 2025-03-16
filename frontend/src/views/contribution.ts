@@ -56,18 +56,21 @@ export module contribution {
         ],
     };
 
-    export const verifySubmission = (form: FormInst) => {
-        form.validate().then((errors) => {
+    export const verifySubmission = async (
+        form: FormInst
+    ): Promise<boolean> => {
+        let valid = false;
+        await form.validate().then((errors) => {
+            valid = !!errors;
             if (errors) {
-                return errors;
-            } else {
-                return null;
+                console.error(JSON.stringify(errors));
             }
         });
+        return valid;
     };
 
     // This opens a POST request to the API
-    export const submitEvent = (
+    export const submitEvent = async (
         form: FormInst,
         formValue: IEventSubmission
     ) => {
@@ -91,6 +94,4 @@ export module contribution {
                 });
         }
     };
-
-    // export const printFormErrors;
 }
