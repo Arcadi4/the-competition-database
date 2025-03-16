@@ -64,7 +64,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { FormInst, useMessage } from "naive-ui";
 import { contribution } from "./contribution";
 import { EventTags, IEventSubmission } from "@/types";
@@ -79,6 +79,23 @@ const formValue = ref<IEventSubmission>({
     tags: [],
     timestamp: new Date().setHours(0, 0, 0, 0),
 });
+
+// restore form value from local storage
+onMounted(() => {
+    const savedFormValue = localStorage.getItem("formValue");
+    if (savedFormValue) {
+        formValue.value = JSON.parse(savedFormValue);
+    }
+});
+
+// listen to form value changes
+watch(
+    formValue,
+    (newValue) => {
+        localStorage.setItem("formValue", JSON.stringify(newValue));
+    },
+    { deep: true }
+);
 
 const tags = Object.keys(EventTags)
     .filter((index: string) => !isNaN(Number(index)))
@@ -95,6 +112,15 @@ const handleSubmitClick = async () => {
                 formValue.value,
                 message
             );
+            // clear form value
+            formValue.value = {
+                title: "",
+                briefDescription: "",
+                longDescription: "",
+                tags: [],
+                timestamp: new Date().setHours(0, 0, 0, 0),
+            };
+            localStorage.removeItem("formValue");
         }
     } catch (error) {
         message.error("Failed to submit event");
