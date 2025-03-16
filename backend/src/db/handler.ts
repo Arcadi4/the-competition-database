@@ -1,18 +1,18 @@
 import mongoose from "mongoose";
 import { DisposedEvent, Event, PendingApprovalEvent } from "./schemas";
-import { IEventData, IFrontendEvent } from "../../../shared/types";
+import { IEventData, IFrontendEvent } from "../shared/types";
 import { EventId } from "../types";
+
+const ErrorMissingMongoUrl = new Error(
+    "MONGODB_URL is not defined in the environment variables"
+);
 
 export class DBHandler {
     private static _instance: DBHandler;
 
     private constructor() {
         const mongoUrl = process.env.MONGODB_URL;
-        if (!mongoUrl) {
-            throw new Error(
-                "MONGODB_URL is not defined in the environment variables"
-            );
-        }
+        if (!mongoUrl) throw ErrorMissingMongoUrl;
         mongoose.connect(mongoUrl).catch((err) => {
             throw err;
         });

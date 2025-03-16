@@ -3,7 +3,7 @@ import {
     IEventData,
     IFrontendEvent,
     IMessage,
-} from "../../shared/types";
+} from "../../backend/src/shared/types";
 
 export { IFrontendEvent, IEventData, IMessage, EventTags };
 

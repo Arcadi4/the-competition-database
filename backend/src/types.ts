@@ -3,7 +3,7 @@ import {
     IEventData,
     IFrontendEvent,
     IMessage,
-} from "../../shared/types";
+} from "./shared/types";
 import mongoose from "mongoose";
 
 export { IFrontendEvent, IEventData, IMessage, EventTags };
