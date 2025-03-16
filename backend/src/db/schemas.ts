@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { EventTags } from "../types";
+import { EventTags } from "../../../shared/types";
 
 const urlRegex =
     /^(?:(http|https|ftp):\/\/)?((|[\w-]+\.)+[a-z0-9]+)(?:(\/[^/?#]+)*)?(\?[^#]+)?(#.+)?$/i;

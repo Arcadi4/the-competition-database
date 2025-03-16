@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { DisposedEvent, Event, PendingApprovalEvent } from "./schemas";
-import { EventId, IEventData, IFrontendEvent } from "../types";
+import { IEventData, IFrontendEvent } from "../../../shared/types";
+import { EventId } from "../types";
 
 export class DBHandler {
     private static _instance: DBHandler;
@@ -74,7 +75,7 @@ export class DBHandler {
 
     public async approveEvent(
         id: EventId
-    ): Promise<string | mongoose.Types.ObjectId> {
+    ): Promise<null | mongoose.Types.ObjectId> {
         try {
             const pendingEvent = await PendingApprovalEvent.findById(id);
             if (!pendingEvent) {
@@ -88,9 +89,7 @@ export class DBHandler {
         } catch (error: any) {
             if (error.name === "ValidationError") {
                 console.warn("Validation warning approving event:", error);
-                // Proceed with the action despite the validation error
-                await PendingApprovalEvent.findByIdAndDelete(id);
-                return id;
+                return null;
             } else if (error.name === "VersionError") {
                 console.error("Version error approving event:", error);
                 throw new Error(
@@ -103,7 +102,7 @@ export class DBHandler {
 
     public async rejectEvent(
         id: EventId
-    ): Promise<string | mongoose.Types.ObjectId> {
+    ): Promise<null | mongoose.Types.ObjectId> {
         try {
             if (!mongoose.isValidObjectId(id)) {
                 return null;
@@ -120,9 +119,7 @@ export class DBHandler {
         } catch (error: any) {
             if (error.name === "ValidationError") {
                 console.warn("Validation warning rejecting event:", error);
-                // Proceed with the action despite the validation error
-                await PendingApprovalEvent.findByIdAndDelete(id);
-                return id;
+                return null;
             } else if (error.name === "VersionError") {
                 console.error("Version error rejecting event:", error);
                 throw new Error(
@@ -154,8 +151,6 @@ export class DBHandler {
         } catch (error: any) {
             if (error.name === "ValidationError") {
                 console.warn("Validation warning restoring event:", error);
-                // Proceed with the action despite the validation error
-                await DisposedEvent.findByIdAndDelete(id);
                 return null;
             } else if (error.name === "VersionError") {
                 console.error("Version error restoring event:", error);
