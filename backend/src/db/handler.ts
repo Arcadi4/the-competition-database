@@ -66,7 +66,7 @@ export class DBHandler {
     public async addPendingApprovalEvent(
         eventData: IFrontendEvent
     ): Promise<mongoose.Types.ObjectId> {
-        const event = this.toFrontendEvent(eventData);
+        const event = this.toEventData(eventData);
         const newEvent = new PendingApprovalEvent(event);
         await newEvent.save();
         console.log(`Added new pending approval event with id: ${newEvent.id}`);
@@ -81,7 +81,7 @@ export class DBHandler {
             if (!pendingEvent) {
                 return null;
             }
-            const approvedEvent = new Event(pendingEvent.toObject());
+            const approvedEvent = new Event(pendingEvent);
             await approvedEvent.save();
             await PendingApprovalEvent.findByIdAndDelete(id);
             console.log(`Approved event with id: ${id}`);
@@ -111,7 +111,7 @@ export class DBHandler {
             if (!event) {
                 return null;
             }
-            const disposedEvent = new DisposedEvent(event.toObject());
+            const disposedEvent = new DisposedEvent(event);
             await disposedEvent.save();
             await PendingApprovalEvent.findByIdAndDelete(id);
             console.log(`Rejected and moved to trash event with id: ${id}`);
@@ -141,12 +141,13 @@ export class DBHandler {
         try {
             const disposedEvent = await DisposedEvent.findById(id);
             if (!disposedEvent) {
+                console.log(`No disposed event found with id: ${id}`);
                 return null;
             }
-            const restoredEvent = new Event(disposedEvent.toObject());
+            const restoredEvent = new PendingApprovalEvent(disposedEvent);
             await restoredEvent.save();
-            await DisposedEvent.findByIdAndDelete(id);
-            console.log(`Restored event with id: ${id}`);
+            await DisposedEvent.findByIdAndDelete(disposedEvent.id);
+            console.log(`Disposed event deleted with id: ${disposedEvent.id}`);
             return restoredEvent._id;
         } catch (error: any) {
             if (error.name === "ValidationError") {
@@ -162,7 +163,7 @@ export class DBHandler {
         }
     }
 
-    private toFrontendEvent(eventData: IFrontendEvent): IEventData {
+    private toEventData(eventData: IFrontendEvent): IEventData {
         return {
             title: eventData.title,
             briefDescription: eventData.briefDescription,
