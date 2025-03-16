@@ -37,3 +37,11 @@ node_modules
 
 # Compiled output
 dist
+
+# Generated files
+shared/*.js
+shared/*.js.map
+frontend/*.js
+frontend/*.js.map
+backend/*.js
+backend/*.js.map
