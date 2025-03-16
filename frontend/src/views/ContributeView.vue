@@ -101,7 +101,7 @@ const tags = Object.keys(EventTags)
     .filter((index: string) => !isNaN(Number(index)))
     .map((index: string) => ({
         label: EventTags[Number(index)],
-        value: index,
+        value: EventTags[Number(index)],
     }));
 
 const handleSubmitClick = async () => {
