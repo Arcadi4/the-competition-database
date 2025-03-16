@@ -10,6 +10,7 @@ export const menuOptions: MenuOption[] = [
     menuItem("about", "About", () => h(Info, { style: IconStyle })),
     menuItem("contribute", "Contribute", () => h(DocAdd, { style: IconStyle })),
     // menuItem("login", "Login", () => h(People, { style: IconStyle })),
+    { type: "divider" },
     menuItem("review", "Review", () => h(Inspection, { style: IconStyle })),
     menuItem("rejected", "Rejected", () => h(Recycling, { style: IconStyle })),
 ];
