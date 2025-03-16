@@ -7,11 +7,6 @@ export const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.post("/api/login", (req, res) => {
-    res.send("Login API is not implemented yet.");
-    res.status(501);
-});
-
 app.get("/", (req, res) => {
     const frontendUrl = process.env.FRONTEND_URL;
     if (!frontendUrl) {
