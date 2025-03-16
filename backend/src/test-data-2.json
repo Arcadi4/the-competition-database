@@ -4,8 +4,8 @@
         "briefDescription": "A conference on data science trends.",
         "longDescription": "Join us for the Data Science Conference where experts will discuss the latest trends and challenges in data science. This event will feature keynote speeches, panel discussions, and workshops on various aspects of data science, including machine learning, data visualization, and big data. Attendees will gain valuable insights into the field of data science and its applications.",
         "tags": [
-            "Data Science",
-            "Conference"
+            "DEBUG 1",
+            "DEBUG 2"
         ],
         "timestamp": "2024-04-10T09:00:00Z",
         "sharepointLinks": [
@@ -17,8 +17,8 @@
         "briefDescription": "A summit on blockchain technology.",
         "longDescription": "Join us for the Blockchain Summit where industry leaders will discuss the latest developments in blockchain technology. This event will feature keynote speeches, panel discussions, and workshops on various aspects of blockchain, including smart contracts, decentralized finance, and blockchain security. Attendees will gain valuable insights into the future of blockchain technology.",
         "tags": [
-            "Blockchain",
-            "Summit"
+            "DEBUG 3",
+            "DEBUG 4"
         ],
         "timestamp": "2024-05-15T10:00:00Z",
         "sharepointLinks": [
@@ -30,9 +30,8 @@
         "briefDescription": "An expo on AI and robotics.",
         "longDescription": "Join us for the AI & Robotics Expo where experts will showcase the latest advancements in artificial intelligence and robotics. This event will feature keynote speeches, panel discussions, and live demonstrations of AI and robotics technologies. Attendees will have the opportunity to interact with cutting-edge innovations and learn about their applications in various industries.",
         "tags": [
-            "AI",
-            "Robotics",
-            "Expo"
+            "DEBUG 1",
+            "DEBUG 5"
         ],
         "timestamp": "2024-06-20T11:00:00Z",
         "sharepointLinks": [
@@ -44,9 +43,8 @@
         "briefDescription": "A forum on fintech innovations.",
         "longDescription": "Join us for the Fintech Innovation Forum where industry leaders will discuss the latest innovations in financial technology. This event will feature keynote speeches, panel discussions, and workshops on various aspects of fintech, including digital banking, blockchain, and financial inclusion. Attendees will gain valuable insights into the future of financial technology and its impact on the industry.",
         "tags": [
-            "Fintech",
-            "Innovation",
-            "Forum"
+            "DEBUG 3",
+            "DEBUG 4"
         ],
         "timestamp": "2024-07-25T12:00:00Z",
         "sharepointLinks": [
@@ -58,9 +56,8 @@
         "briefDescription": "A summit on healthcare technology.",
         "longDescription": "Join us for the Healthcare Technology Summit where experts will discuss the latest advancements in healthcare technology. This event will feature keynote speeches, panel discussions, and workshops on various aspects of healthcare technology, including telemedicine, medical devices, and health data analytics. Attendees will gain valuable insights into the future of healthcare technology and its applications.",
         "tags": [
-            "Healthcare",
-            "Technology",
-            "Summit"
+            "DEBUG 1",
+            "DEBUG 5"
         ],
         "timestamp": "2024-08-30T13:00:00Z",
         "sharepointLinks": [

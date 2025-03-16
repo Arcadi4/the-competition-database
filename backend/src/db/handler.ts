@@ -65,7 +65,7 @@ export class DBHandler {
     public async addPendingApprovalEvent(
         eventData: IFrontendEvent
     ): Promise<mongoose.Types.ObjectId> {
-        const event = this.frontendEventTransform(eventData);
+        const event = this.toFrontendEvent(eventData);
         const newEvent = new PendingApprovalEvent(event);
         await newEvent.save();
         console.log(`Added new pending approval event with id: ${newEvent.id}`);
@@ -85,7 +85,7 @@ export class DBHandler {
             await PendingApprovalEvent.findByIdAndDelete(id);
             console.log(`Approved event with id: ${id}`);
             return approvedEvent._id;
-        } catch (error) {
+        } catch (error: any) {
             if (error.name === "ValidationError") {
                 console.warn("Validation warning approving event:", error);
                 // Proceed with the action despite the validation error
@@ -117,7 +117,7 @@ export class DBHandler {
             await PendingApprovalEvent.findByIdAndDelete(id);
             console.log(`Rejected and moved to trash event with id: ${id}`);
             return disposedEvent._id;
-        } catch (error) {
+        } catch (error: any) {
             if (error.name === "ValidationError") {
                 console.warn("Validation warning rejecting event:", error);
                 // Proceed with the action despite the validation error
@@ -133,7 +133,41 @@ export class DBHandler {
         }
     }
 
-    private frontendEventTransform(eventData: IFrontendEvent): IEventData {
+    public async getRejectedEvents(): Promise<JSON[]> {
+        console.log("Rejected events fetching");
+        return DisposedEvent.find();
+    }
+
+    public async restoreEvent(
+        id: EventId
+    ): Promise<mongoose.Types.ObjectId | null> {
+        try {
+            const disposedEvent = await DisposedEvent.findById(id);
+            if (!disposedEvent) {
+                return null;
+            }
+            const restoredEvent = new Event(disposedEvent.toObject());
+            await restoredEvent.save();
+            await DisposedEvent.findByIdAndDelete(id);
+            console.log(`Restored event with id: ${id}`);
+            return restoredEvent._id;
+        } catch (error: any) {
+            if (error.name === "ValidationError") {
+                console.warn("Validation warning restoring event:", error);
+                // Proceed with the action despite the validation error
+                await DisposedEvent.findByIdAndDelete(id);
+                return null;
+            } else if (error.name === "VersionError") {
+                console.error("Version error restoring event:", error);
+                throw new Error(
+                    "Event has been modified by another process. Please try again."
+                );
+            }
+            throw error;
+        }
+    }
+
+    private toFrontendEvent(eventData: IFrontendEvent): IEventData {
         return {
             title: eventData.title,
             briefDescription: eventData.briefDescription,

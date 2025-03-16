@@ -4,8 +4,8 @@
         "briefDescription": "A conference for tech enthusiasts.",
         "longDescription": "Join us for the annual tech conference where industry leaders discuss the latest trends in technology. This event will feature keynote speeches, panel discussions, and networking opportunities with professionals from various tech sectors. Attendees will have the chance to learn about cutting-edge innovations and gain insights into the future of technology.",
         "tags": [
-            "Technology",
-            "Conference"
+            "DEBUG 1",
+            "DEBUG 2"
         ],
         "timestamp": "2023-10-01T10:00:00Z",
         "sharepointLinks": [
@@ -17,8 +17,8 @@
         "briefDescription": "Pitch your startup idea.",
         "longDescription": "An event where startups pitch their ideas to potential investors. This is a great opportunity for entrepreneurs to showcase their innovative solutions and receive valuable feedback from experienced investors. Participants will also have the chance to network with other startups and industry experts, fostering collaboration and potential partnerships.",
         "tags": [
-            "Startup",
-            "Pitch"
+            "DEBUG 3",
+            "DEBUG 4"
         ],
         "timestamp": "2023-10-02T18:00:00Z",
         "sharepointLinks": [
@@ -30,8 +30,8 @@
         "briefDescription": "Hands-on AI workshop.",
         "longDescription": "A workshop to learn about the latest advancements in artificial intelligence. Participants will engage in hands-on activities and projects, gaining practical experience with AI tools and techniques. The workshop will cover topics such as machine learning, neural networks, and data analysis, providing a comprehensive understanding of AI applications.",
         "tags": [
-            "AI",
-            "Workshop"
+            "DEBUG 1",
+            "DEBUG 5"
         ],
         "timestamp": "2023-11-03T09:00:00Z",
         "sharepointLinks": [
@@ -43,7 +43,7 @@
         "briefDescription": "Meet industry professionals.",
         "longDescription": "An event to network with professionals from various industries. This event provides a platform for attendees to connect with peers, share knowledge, and explore potential business opportunities. Whether you are looking to expand your professional network or seek advice from industry veterans, this event offers valuable interactions and insights.",
         "tags": [
-            "Networking"
+            "DEBUG 2"
         ],
         "timestamp": "2023-11-04T17:00:00Z",
         "sharepointLinks": [
@@ -55,8 +55,8 @@
         "briefDescription": "Launch of our new product.",
         "longDescription": "Join us for the launch of our latest product. This event will feature a detailed presentation of the product's features and benefits, followed by a live demonstration. Attendees will have the opportunity to ask questions and interact with the product development team. Don't miss this chance to be among the first to experience our new innovation.",
         "tags": [
-            "Product",
-            "Launch"
+            "DEBUG 3",
+            "DEBUG 4"
         ],
         "timestamp": "2023-12-05T11:00:00Z",
         "sharepointLinks": [
@@ -68,8 +68,8 @@
         "briefDescription": "Intensive coding bootcamp.",
         "longDescription": "A bootcamp to learn coding from scratch. This intensive program is designed for beginners and covers fundamental programming concepts, languages, and tools. Participants will work on real-world projects, gaining hands-on experience and building a strong foundation in coding. By the end of the bootcamp, attendees will be equipped with the skills needed to pursue a career in software development.",
         "tags": [
-            "Coding",
-            "Bootcamp"
+            "DEBUG 1",
+            "DEBUG 5"
         ],
         "timestamp": "2023-12-06T08:00:00Z",
         "sharepointLinks": [
@@ -81,8 +81,8 @@
         "briefDescription": "Learn design thinking.",
         "longDescription": "A workshop to learn the principles of design thinking. Participants will explore the design thinking process, including empathy, ideation, prototyping, and testing. Through interactive exercises and group activities, attendees will develop creative problem-solving skills and learn how to apply design thinking to various challenges. This workshop is ideal for anyone looking to enhance their innovation capabilities.",
         "tags": [
-            "Design",
-            "Workshop"
+            "DEBUG 2",
+            "DEBUG 4"
         ],
         "timestamp": "2024-01-07T10:00:00Z",
         "sharepointLinks": [
@@ -94,7 +94,7 @@
         "briefDescription": "24-hour hackathon.",
         "longDescription": "A 24-hour hackathon to build innovative solutions. Participants will form teams and work on projects that address specific challenges. This event encourages creativity, collaboration, and rapid prototyping. At the end of the hackathon, teams will present their solutions to a panel of judges, with prizes awarded to the most innovative and impactful projects.",
         "tags": [
-            "Hackathon"
+            "DEBUG 3"
         ],
         "timestamp": "2024-01-08T12:00:00Z",
         "sharepointLinks": [
@@ -106,8 +106,8 @@
         "briefDescription": "Seminar on digital marketing.",
         "longDescription": "A seminar to learn about the latest trends in digital marketing. Industry experts will share insights on topics such as social media marketing, search engine optimization, content marketing, and data analytics. Attendees will gain practical knowledge and strategies to enhance their digital marketing efforts and drive business growth.",
         "tags": [
-            "Marketing",
-            "Seminar"
+            "DEBUG 1",
+            "DEBUG 4"
         ],
         "timestamp": "2024-02-09T14:00:00Z",
         "sharepointLinks": [
@@ -119,8 +119,8 @@
         "briefDescription": "Meetup for blockchain enthusiasts.",
         "longDescription": "A meetup to discuss the latest developments in blockchain technology. This event brings together blockchain enthusiasts, developers, and industry professionals to share knowledge and explore new opportunities. Topics will include blockchain applications, smart contracts, and decentralized finance. Attendees will have the chance to network and collaborate on blockchain projects.",
         "tags": [
-            "Blockchain",
-            "Meetup"
+            "DEBUG 2",
+            "DEBUG 5"
         ],
         "timestamp": "2024-02-10T16:00:00Z",
         "sharepointLinks": [

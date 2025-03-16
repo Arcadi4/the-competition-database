@@ -2,7 +2,7 @@ import { DocAdd, HomeTwo, Info, Search } from "@icon-park/vue-next";
 import { MenuOption } from "naive-ui";
 import { h } from "vue";
 import { RouterLink } from "vue-router";
-import { Inspection } from "@icon-park/vue-next/es";
+import { Inspection, Recycling } from "@icon-park/vue-next/es";
 
 export const menuOptions: MenuOption[] = [
     menuItem("timeline", "Timeline", () => h(HomeTwo, { style: IconStyle })),
@@ -11,6 +11,7 @@ export const menuOptions: MenuOption[] = [
     menuItem("contribute", "Contribute", () => h(DocAdd, { style: IconStyle })),
     // menuItem("login", "Login", () => h(People, { style: IconStyle })),
     menuItem("review", "Review", () => h(Inspection, { style: IconStyle })),
+    menuItem("rejected", "Rejected", () => h(Recycling, { style: IconStyle })),
 ];
 
 function menuItem(uri: string, label: string, icon: any): MenuOption {

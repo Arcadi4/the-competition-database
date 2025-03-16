@@ -115,3 +115,27 @@ app.post("/api/event/reject", async (req, res) => {
         res.status(500).json({ error: "Internal server error." });
     }
 });
+
+app.get("/api/event/rejected", async (req, res) => {
+    const data = await DBHandler.getInstance().getRejectedEvents();
+    res.status(200).json(data);
+});
+
+app.post("/api/event/restore", async (req, res) => {
+    try {
+        const { eventId } = req.body;
+        if (!eventId) {
+            return res.status(400).json({ error: "Event ID is required." });
+        }
+
+        const result = await DBHandler.getInstance().restoreEvent(eventId);
+        if (result) {
+            res.status(200).json({ message: `Event restored, id: ${result}` });
+        } else {
+            res.status(400).json({ error: "Failed to restore event." });
+        }
+    } catch (error) {
+        console.error("Error restoring event:", error);
+        res.status(500).json({ error: "Internal server error." });
+    }
+});

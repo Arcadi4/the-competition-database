@@ -5,6 +5,7 @@ import SearchView from "@/views/SearchView.vue";
 import ContributeView from "@/views/ContributeView.vue";
 import LoginView from "@/views/LoginView.vue";
 import ReviewView from "@/views/ReviewView.vue";
+import RejectedEventsView from "@/views/RejectedEventsView.vue";
 
 const routes: Array<RouteRecordRaw> = [
     routeRecordRaw("timeline", TimelineView),
@@ -13,6 +14,7 @@ const routes: Array<RouteRecordRaw> = [
     routeRecordRaw("contribute", ContributeView),
     routeRecordRaw("login", LoginView),
     routeRecordRaw("review", ReviewView),
+    routeRecordRaw("rejected", RejectedEventsView),
 ];
 
 const router = createRouter({
