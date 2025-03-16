@@ -30,6 +30,7 @@
                         :events="searchResults"
                         :highlight-patterns="keywords"
                         style="width: 100%"
+                        @event-click="handleEventClick"
                     />
                     <n-empty
                         :class="
@@ -49,8 +50,31 @@
                 </n-flex>
             </div>
         </template>
-        <template v-if="!isNoSearchResult" #2>
-            <article-viewer />
+        <template #2>
+            <n-layout>
+                <n-layout-content
+                    content-style="
+                        margin: 0 auto;
+                        max-width: 768px;
+                        padding: 20px;
+                        height: 100vh;
+                    "
+                >
+                    <article-viewer
+                        v-if="selectedEvent"
+                        :abstract="selectedEvent?.briefDescription"
+                        :content="selectedEvent?.longDescription"
+                        :date="new Date(selectedEvent?.timestamp)"
+                        :title="selectedEvent?.title"
+                        author="The Competition Database"
+                    />
+                    <n-empty
+                        v-if="!selectedEvent"
+                        description="Click on events to show detail"
+                        style="margin-top: 45vh"
+                    />
+                </n-layout-content>
+            </n-layout>
         </template>
     </n-split>
 </template>
@@ -71,6 +95,7 @@ const keywords = computed(() => {
     return keywordString.value.trim().split(" ");
 });
 const isNoSearchResult = ref<boolean>(false);
+const selectedEvent = ref<IEvent | null>(null);
 
 const search = async () => {
     const response = await axios.get(
@@ -82,10 +107,11 @@ const search = async () => {
     }));
 };
 
+const handleEventClick = (event: IEvent) => {
+    selectedEvent.value = event;
+};
+
 watch(searchResults, (newVal) => {
-    // isNoSearchResult.value = !(
-    //     keywords.value.length !== 0 && newVal.length === 0
-    // );
     if (keywords.value.length !== 0 && newVal.length === 0) {
         isNoSearchResult.value = false;
     } else {

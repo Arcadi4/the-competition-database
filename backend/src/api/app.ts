@@ -1,11 +1,87 @@
 import express from "express";
 import { DBHandler, PendingApprovalEvent } from "../db";
 import cors from "cors";
+import passport from "passport";
+import { Strategy as MicrosoftStrategy } from "passport-microsoft";
+import session from "express-session";
 
 export const app = express();
 
 app.use(express.json());
 app.use(cors());
+
+const enableLogin = process.env.ENABLE_LOGIN === "true";
+const adminEmails = process.env.ADMIN_EMAILS?.split(",") || [];
+
+if (enableLogin) {
+    app.use(
+        session({
+            secret: "your_secret_key",
+            resave: false,
+            saveUninitialized: true,
+        })
+    );
+    app.use(passport.initialize());
+    app.use(passport.session());
+
+    passport.use(
+        new MicrosoftStrategy(
+            {
+                clientID: process.env.MICROSOFT_CLIENT_ID || "",
+                clientSecret: process.env.MICROSOFT_CLIENT_SECRET || "",
+                callbackURL: "/auth/microsoft/callback",
+                scope: ["user.read"],
+            },
+            (
+                accessToken: any,
+                refreshToken: any,
+                profile: any,
+                done: (arg0: null, arg1: any) => any
+            ) => {
+                return done(null, profile);
+            }
+        )
+    );
+
+    passport.serializeUser((user, done) => {
+        done(null, user);
+    });
+
+    passport.deserializeUser((obj, done) => {
+        done(null, obj);
+    });
+
+    app.get("/auth/microsoft", passport.authenticate("microsoft"));
+
+    app.get(
+        "/auth/microsoft/callback",
+        passport.authenticate("microsoft", { failureRedirect: "/" }),
+        (req, res) => {
+            res.redirect("/");
+        }
+    );
+
+    app.get("/logout", (req, res) => {
+        req.logout((err) => {
+            if (err) {
+                return next(err);
+            }
+            res.redirect("/");
+        });
+    });
+
+    const isAdmin = (req, res, next) => {
+        if (
+            req.isAuthenticated() &&
+            adminEmails.includes(req.user.emails[0].value)
+        ) {
+            return next();
+        }
+        res.status(403).send("Forbidden");
+    };
+
+    app.use("/api/admin", isAdmin);
+}
 
 app.get("/", (req, res) => {
     const frontendUrl = process.env.FRONTEND_URL;

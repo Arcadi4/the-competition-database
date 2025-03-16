@@ -5,6 +5,8 @@ import path from "path";
 
 dotenv.config({ path: path.resolve(__dirname, ".env") });
 
+const enableLogin = process.env.ENABLE_LOGIN === "true";
+
 // Connect to MongoDB
 const mongoUrl = process.env.MONGODB_URL;
 try {
@@ -26,4 +28,10 @@ try {
         `Failed to start server on port http://localhost:${port} : ${err}`
     );
     process.exit(1);
+}
+
+if (enableLogin) {
+    console.log("Login functionality is enabled.");
+} else {
+    console.log("Login functionality is disabled.");
 }
