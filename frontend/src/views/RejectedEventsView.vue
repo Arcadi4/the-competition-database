@@ -47,9 +47,9 @@
 import { onMounted, ref } from "vue";
 import axios from "axios";
 import { useMessage } from "naive-ui";
-import { IEvent } from "@/types";
 import { apiUrl } from "@/main";
 import { Check } from "@icon-park/vue-next";
+import { IEvent } from "../../../backend/src/shared/types";
 
 const rejectedEvents = ref<IEvent[]>([]);
 const message = useMessage();

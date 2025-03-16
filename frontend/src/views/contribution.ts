@@ -1,5 +1,4 @@
-import type { FormInst, FormItemRule } from "naive-ui";
-import { message } from "../../message";
+import { FormInst, FormItemRule } from "naive-ui";
 import axios from "axios";
 import { apiUrl } from "@/main";
 import { IEventSubmission } from "@/types";
@@ -47,7 +46,7 @@ export module contribution {
                 validator: (_rule: FormItemRule, value: number) => {
                     if (value < Date.now().valueOf() - 86400000) {
                         return new Error(
-                            "This is an past event, but you are still welcome to contribute"
+                            "This is a past event, but you are still welcome to contribute"
                         );
                     }
                     return true;
@@ -57,40 +56,41 @@ export module contribution {
     };
 
     export const verifySubmission = async (
-        form: FormInst
+        form: FormInst,
+        message: any
     ): Promise<boolean> => {
         let valid = false;
         await form.validate().then((errors) => {
             valid = !!errors;
             if (errors) {
-                console.error(JSON.stringify(errors));
+                console.log("Errors in form submission:", errors);
             }
         });
+
         return valid;
     };
 
     // This opens a POST request to the API
     export const submitEvent = async (
         form: FormInst,
-        formValue: IEventSubmission
+        formValue: IEventSubmission,
+        message: any
     ) => {
-        const errors = verifySubmission(form);
-        if (errors != null) {
+        const isValid = await verifySubmission(form, message);
+        if (!isValid) {
             message.error("Errors in form submission");
         } else {
-            // Submit the form
             message.info("Submitting form...");
             console.log("Submitting following:", JSON.stringify(formValue));
             axios
                 .post(`${apiUrl}/api/event/add`, formValue)
-                .catch((err) => {
-                    message.error("Submission failed!");
-                    message.error(err);
-                    console.error(`Failed to submit event: ${err}`);
-                })
                 .then((res) => {
                     message.success("Submission successful!");
                     console.log("Submission successful: ", JSON.stringify(res));
+                })
+                .catch((err) => {
+                    message.error("Submission failed!");
+                    console.error(`Failed to submit event: ${err}`);
                 });
         }
     };

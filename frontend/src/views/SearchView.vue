@@ -60,9 +60,9 @@ import { FileFailedOne, Search } from "@icon-park/vue-next";
 import { computed, h, ref, watch } from "vue";
 import axios from "axios";
 import { apiUrl } from "@/main";
-import { IEvent } from "@/types";
 import EventTimeline from "@/components/TimelineEvent.vue";
 import ArticleViewer from "@/components/ViewerGeneral.vue";
+import { IEvent } from "../../../backend/src/shared/types";
 
 const searchResults = ref<IEvent[]>([]);
 const keywordString = ref("");

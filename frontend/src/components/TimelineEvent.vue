@@ -46,13 +46,13 @@
 <script lang="ts" setup>
 import EventTimelineNode from "@/components/TimelineEventNode.vue";
 import { defineEmits, defineProps } from "vue";
-import { IEvent } from "@/types";
 import {
     formatMonth,
     formatMonthday,
     formatWeekday,
     formatYear,
 } from "@/utilities";
+import { IEvent } from "../../../backend/src/shared/types";
 
 const props = defineProps<{
     events: IEvent[];

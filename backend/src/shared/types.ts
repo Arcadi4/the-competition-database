@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 export interface IFrontendEvent {
     title: string;
     briefDescription: string;
@@ -28,3 +30,23 @@ export enum EventTags {
     "DEBUG 4",
     "DEBUG 5",
 }
+
+export interface IEventSubmission {
+    title: string;
+    briefDescription: string;
+    longDescription: string;
+    tags: string[];
+    timestamp: number;
+}
+
+export interface IEvent {
+    _id: string;
+    title: string;
+    briefDescription: string;
+    longDescription: string;
+    tags: string[];
+    timestamp: string;
+    sharepointLinks: string[];
+}
+
+export type EventId = string | mongoose.Types.ObjectId;

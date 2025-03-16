@@ -51,22 +51,23 @@
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
 import axios from "axios";
-import { useMessage } from "naive-ui";
-import { IEvent } from "@/types";
 import { apiUrl } from "@/main";
 import { Check } from "@icon-park/vue-next";
+import { IEvent } from "@/types";
+import { useMessage } from "naive-ui";
+
+const message = useMessage();
 
 const pendingEvents = ref<IEvent[]>([]);
-const message = useMessage();
 
 const fetchPendingEvents = async () => {
     try {
         const response = await axios.get(`${apiUrl}/api/event/pending`);
         pendingEvents.value = response.data;
-    } catch (error) {
+    } catch (err) {
         message.error("Failed to fetch pending events.");
         console.log("Failed to fetch pending events.");
-        console.log(error);
+        console.log(err);
     }
 };
 
@@ -75,10 +76,10 @@ const approveEvent = async (eventId: string) => {
         await axios.post(`${apiUrl}/api/event/approve`, { eventId });
         message.success("Event approved.");
         await fetchPendingEvents();
-    } catch (error) {
+    } catch (err) {
         message.error("Failed to approve event.");
         console.log("Failed to approve event.");
-        console.log(error);
+        console.log(err);
     }
 };
 
@@ -87,10 +88,10 @@ const rejectEvent = async (eventId: string) => {
         await axios.post(`${apiUrl}/api/event/reject`, { eventId });
         message.success("Event rejected.");
         await fetchPendingEvents();
-    } catch (error) {
+    } catch (err) {
         message.error("Failed to reject event.");
         console.log("Failed to reject event.");
-        console.log(error);
+        console.log(err);
     }
 };
 

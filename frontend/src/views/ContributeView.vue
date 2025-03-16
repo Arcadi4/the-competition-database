@@ -65,10 +65,11 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
+import { FormInst, useMessage } from "naive-ui";
+import { contribution } from "./contribution";
 import { EventTags, IEventSubmission } from "@/types";
-import type { FormInst } from "naive-ui";
-import { contribution } from "@/views/contribution";
-import { message } from "../../message";
+
+const message = useMessage();
 
 const formRef = ref<FormInst | null>(null);
 const formValue = ref<IEventSubmission>({
@@ -87,15 +88,17 @@ const tags = Object.keys(EventTags)
     }));
 
 const handleSubmitClick = async () => {
-    if (formRef.value === null) {
-        return;
-    }
-    if (await contribution.verifySubmission(formRef.value)) {
-        await contribution.submitEvent(formRef.value, formValue.value);
-    } else {
-        message.warning("Please check the field requirements.");
+    try {
+        if (formRef.value) {
+            await contribution.submitEvent(
+                formRef.value,
+                formValue.value,
+                message
+            );
+        }
+    } catch (error) {
+        message.error("Failed to submit event");
+        console.log(error);
     }
 };
 </script>
-
-<style scoped></style>

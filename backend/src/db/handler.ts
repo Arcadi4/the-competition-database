@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import { DisposedEvent, Event, PendingApprovalEvent } from "./schemas";
-import { IEventData, IFrontendEvent } from "../shared/types";
-import { EventId } from "../types";
+import { EventId, IEventData, IFrontendEvent } from "../shared/types";
 
 const ErrorMissingMongoUrl = new Error(
     "MONGODB_URL is not defined in the environment variables"

@@ -56,12 +56,12 @@
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
 import axios from "axios";
-import { IEvent } from "@/types";
 import { apiUrl } from "@/main";
 import EventTimeline from "@/components/TimelineEvent.vue";
 import ArticleViewer from "@/components/ViewerGeneral.vue";
 import router from "@/router";
-import { Edit } from "@icon-park/vue-next"; // TODO: Use dynamic loading rather than loading all events at once
+import { Edit } from "@icon-park/vue-next";
+import { IEvent } from "../../../backend/src/shared/types"; // TODO: Use dynamic loading rather than loading all events at once
 
 // TODO: Use dynamic loading rather than loading all events at once
 
