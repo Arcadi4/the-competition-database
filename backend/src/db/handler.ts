@@ -77,12 +77,17 @@ export class DBHandler {
         id: EventId
     ): Promise<null | mongoose.Types.ObjectId> {
         try {
+            if (!mongoose.isValidObjectId(id)) {
+                return null;
+            }
+            await PendingApprovalEvent.findByIdAndUpdate(id);
             const pendingEvent = await PendingApprovalEvent.findById(id);
             if (!pendingEvent) {
                 return null;
             }
-            const approvedEvent = new Event(pendingEvent);
+            const approvedEvent = new Event(pendingEvent.toObject());
             await approvedEvent.save();
+            id = pendingEvent._id;
             await PendingApprovalEvent.findByIdAndDelete(id);
             console.log(`Approved event with id: ${id}`);
             return approvedEvent._id;
@@ -91,7 +96,7 @@ export class DBHandler {
                 console.warn("Validation warning approving event:", error);
                 return null;
             } else if (error.name === "VersionError") {
-                console.error("Version error approving event:", error);
+                console.error("Version error rejecting event:", error);
                 throw new Error(
                     "Event has been modified by another process. Please try again."
                 );
@@ -107,12 +112,14 @@ export class DBHandler {
             if (!mongoose.isValidObjectId(id)) {
                 return null;
             }
+            await PendingApprovalEvent.findByIdAndUpdate(id);
             const event = await PendingApprovalEvent.findById(id);
             if (!event) {
                 return null;
             }
-            const disposedEvent = new DisposedEvent(event);
+            const disposedEvent = new DisposedEvent(event.toObject());
             await disposedEvent.save();
+            id = event._id;
             await PendingApprovalEvent.findByIdAndDelete(id);
             console.log(`Rejected and moved to trash event with id: ${id}`);
             return disposedEvent._id;
@@ -139,12 +146,15 @@ export class DBHandler {
         id: EventId
     ): Promise<mongoose.Types.ObjectId | null> {
         try {
+            await PendingApprovalEvent.findByIdAndUpdate(id);
             const disposedEvent = await DisposedEvent.findById(id);
             if (!disposedEvent) {
                 console.log(`No disposed event found with id: ${id}`);
                 return null;
             }
-            const restoredEvent = new PendingApprovalEvent(disposedEvent);
+            const restoredEvent = new PendingApprovalEvent(
+                disposedEvent.toObject()
+            );
             await restoredEvent.save();
             await DisposedEvent.findByIdAndDelete(disposedEvent.id);
             console.log(`Disposed event deleted with id: ${disposedEvent.id}`);
